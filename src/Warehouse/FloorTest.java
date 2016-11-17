@@ -1,8 +1,9 @@
 
-package warehouse_system.floor;
+package Warehouse;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
 import java.util.ArrayList;
 
 /**

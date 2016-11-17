@@ -1,4 +1,5 @@
-package warehouse_system.floor;
+package Warehouse;
+
 /**
  * 
  * @author josephtleiferman

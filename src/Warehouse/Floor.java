@@ -1,4 +1,4 @@
-package warehouse_system.floor;
+package Warehouse;
 
 import java.util.ArrayList;
 

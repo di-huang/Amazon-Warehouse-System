@@ -1,4 +1,4 @@
-package warehouse_system.floor;
+package Warehouse;
 /**
  * Used for storing object locations within the warehouse
  * @author josephtleiferman
