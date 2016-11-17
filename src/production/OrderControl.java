@@ -1,4 +1,4 @@
-package warehouse_system.orders;
+package production;
 
 import java.util.LinkedList;
 import warehouse_system.inventory.*;

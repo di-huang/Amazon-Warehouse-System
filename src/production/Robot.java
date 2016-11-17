@@ -1,4 +1,4 @@
-package warehouse_system.robot;
+package production;
 /**
  * 
  * @author Wei Gui

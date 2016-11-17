@@ -1,4 +1,4 @@
-package warehouse_system;
+package production;
 
 import org.junit.Test;
 

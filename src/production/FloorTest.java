@@ -1,5 +1,5 @@
 
-package Warehouse;
+package production;
 
 import static org.junit.Assert.*;
 

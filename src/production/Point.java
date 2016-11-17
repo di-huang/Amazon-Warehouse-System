@@ -1,4 +1,4 @@
-package Warehouse;
+package production;
 /**
  * Used for storing object locations within the warehouse
  * @author josephtleiferman

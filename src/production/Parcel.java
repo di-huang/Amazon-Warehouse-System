@@ -1,4 +1,4 @@
-package Warehouse;
+package production;
 
 //import warehouse_system.*;
 //import warehouse_system.inventory.*;

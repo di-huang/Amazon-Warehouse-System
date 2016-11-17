@@ -1,4 +1,4 @@
-package warehouse_system;
+package production;
 
 import warehouse_system.belt.Belt;
 import warehouse_system.floor.Floor;
