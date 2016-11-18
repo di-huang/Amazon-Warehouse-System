@@ -1,4 +1,4 @@
-package warehouse_system.inventory;
+package production;
 
 public class Item {
 	
@@ -22,6 +22,15 @@ public class Item {
 	public String toString() {
 		return this.name;
 		
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	public String getName() {
+		return name;
+	}
+	public double getWeight() {
+		return weight;
 	}
 
 }

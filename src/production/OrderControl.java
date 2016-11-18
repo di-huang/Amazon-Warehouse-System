@@ -1,11 +1,10 @@
 package production;
 
 import java.util.LinkedList;
-import warehouse_system.inventory.*;
 
-import warehouse_system.Tickable;
-import warehouse_system.inventory.ItemController;
-import warehouse_system.robot.RobotScheduler;
+import production.Tickable;
+import production.ItemController;
+import production.RobotScheduler;
 
 public class OrderControl implements Tickable {
 	

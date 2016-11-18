@@ -1,9 +1,9 @@
-package warehouse_system.inventory;
+package production;
 
 import java.util.HashMap;
 
-import warehouse_system.Report;
-import warehouse_system.orders.Order;
+import production.Order;
+import production.Report;
 
 public class ItemController {
 	/**
@@ -20,7 +20,7 @@ public class ItemController {
 	}
 	
 	public void addItem(Item i){
-		inventory.put(i.name, i);
+		inventory.put(i.getName(), i);
 	}
 
 	public boolean itemAvailable(Item i) {

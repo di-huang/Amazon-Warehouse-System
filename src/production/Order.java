@@ -1,6 +1,6 @@
 package production;
 
-import warehouse_system.inventory.Item;
+import production.Item;
 
 public class Order {
 	
@@ -52,7 +52,7 @@ public class Order {
     }
     
     public String getItemBeingOrderedName() {
-    	return this.itemBeingOrdered.name;
+    	return this.itemBeingOrdered.getName();
     }
     
     public String getItemBeingOrderedNameString() {

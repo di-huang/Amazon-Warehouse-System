@@ -6,9 +6,9 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import warehouse_system.Report;
-import warehouse_system.Tickable;
-import warehouse_system.floor.Floor;
+import production.Report;
+import production.Tickable;
+import production.Floor;
 
 public class Visualizer extends JFrame implements Tickable{
 

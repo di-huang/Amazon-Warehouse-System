@@ -2,8 +2,8 @@ package production;
 
 import java.util.ArrayList;
 
-import warehouse_system.Tickable;
-import warehouse_system.floor.Point;
+import production.Tickable;
+import production.Point;
 /**
  * 
  * @author Wei Gui

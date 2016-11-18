@@ -2,18 +2,18 @@ package production;
 
 import org.junit.Test;
 
-import warehouse_system.belt.Belt;
-import warehouse_system.floor.Floor;
-import warehouse_system.floor.MockFloor;
-import warehouse_system.floor.Point;
-import warehouse_system.inventory.Item;
-import warehouse_system.inventory.ItemController;
-import warehouse_system.orders.Order;
-import warehouse_system.orders.OrderControl;
-import warehouse_system.robot.MockRobot;
-import warehouse_system.robot.RobotScheduler;
-import warehouse_system.visualizer.Visualizer;
-import warehouse_system.robot.Position;
+import production.Belt;
+import production.Floor;
+import production.MockFloor;
+import production.Point;
+import production.Item;
+import production.ItemController;
+import production.Order;
+import production.OrderControl;
+import production.MockRobot;
+import production.RobotScheduler;
+import production.Visualizer;
+import production.Position;
 
 /**
  * 
