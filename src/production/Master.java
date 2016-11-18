@@ -1,11 +1,11 @@
 package production;
 
-import warehouse_system.belt.Belt;
-import warehouse_system.floor.Floor;
-import warehouse_system.inventory.ItemController;
-import warehouse_system.orders.OrderControl;
-import warehouse_system.robot.RobotScheduler;
-import warehouse_system.visualizer.Visualizer;
+import production.Belt;
+import production.Floor;
+import production.ItemController;
+import production.OrderControl;
+import production.RobotScheduler;
+import production.Visualizer;
 
 /**
  * 
