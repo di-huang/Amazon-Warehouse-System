@@ -95,4 +95,8 @@ public class MockBelt implements Belt {
   public boolean binAvailable() {
 	return false;
     }
+ 
+  public Bin getBin() {
+	return null; 
+    }
 }
