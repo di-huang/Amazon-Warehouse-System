@@ -2,9 +2,12 @@ package production;
 
 import java.util.HashMap;
 
+<<<<<<< HEAD
 import production.Order;
 import production.Report;
 
+=======
+>>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
 public class ItemController {
 	/**
 	 * This works as the inventory subsystem

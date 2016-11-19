@@ -1,5 +1,4 @@
 package production;
-
 //import warehouse_system.Report;
 //import warehouse_system.Tickable;
 //import warehouse_system.belt.Bin;
@@ -11,7 +10,6 @@ package production;
 //later
 
 import java.util.*;
-
 //Ted Herman, Nicholas Barnes
 
 

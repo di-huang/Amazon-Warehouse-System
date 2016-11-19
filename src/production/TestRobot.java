@@ -6,7 +6,11 @@ package production;
  */
 public class TestRobot {
 
+<<<<<<< HEAD
 	public void TestingRobot() throws InterruptedException {
+=======
+	public static void main(String[] args) throws InterruptedException {
+>>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
 		RobotScheduler rs=new RobotScheduler(0);
 		//The MockRobot is designed to hold only 2-robots test in the charging pattern
 		//The position of these two robots are changeable

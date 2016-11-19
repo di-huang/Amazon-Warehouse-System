@@ -86,6 +86,7 @@ public class MockFloor implements Floor {
         newLocation = location;
         FLOOR_LOCATIONS.put(object, newLocation);
         System.out.println(object + "'s location updated too" + " (" + location.getX() + "," + location.getY()+  ")");
+
     }
     /**
      * will be called when the floor is first initialized so that we can choose where the robot begins 

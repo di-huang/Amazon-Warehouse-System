@@ -74,6 +74,7 @@ public interface Floor {
                     }
                 }
             }
+            
             alternator +=1;
         }
         return route;
