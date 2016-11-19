@@ -1,6 +1,4 @@
 package production;
-
-<<<<<<< HEAD
 import production.Belt;
 import production.Floor;
 import production.ItemController;
@@ -8,8 +6,6 @@ import production.OrderControl;
 import production.RobotScheduler;
 import production.Visualizer;
 
-=======
->>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
 /**
  * 
  * @author Di Huang

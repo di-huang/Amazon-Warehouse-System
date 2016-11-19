@@ -2,7 +2,6 @@ package production;
 
 import java.util.LinkedList;
 
-<<<<<<< HEAD
 import production.Tickable;
 import production.ItemController;
 import production.RobotScheduler;
@@ -14,17 +13,7 @@ public class OrderControl implements Tickable {
 	 * orders are held in a queue
 	 * 
 	 */
-	private LinkedList<Order> orderQueue = new LinkedList<>();
-=======
-public class OrderControl implements Tickable {
-	
-	/**
-	 * 
-	 * orders are held in a queue
-	 * 
-	 */
 	private LinkedList<Order> orderQueue;
->>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
 	private ItemController itemController;
 	private RobotScheduler robotScheduler;
 	

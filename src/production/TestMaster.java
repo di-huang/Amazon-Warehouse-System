@@ -1,8 +1,6 @@
 package production;
 
 import org.junit.Test;
-
-<<<<<<< HEAD
 import production.Floor;
 import production.MockFloor;
 import production.Point;
@@ -16,19 +14,6 @@ import production.Visualizer;
 
 /**
  * 
- * @author Di Huang
- * @author josephtLeiferman
- */
-public class TestMaster {
-	
-	@Test
-	public void test000() {	
-		// Doing unit test
-		MockFloor F = new MockFloor();
-		MockBelt B = new MockBelt(F);
-=======
-/**
- * @author Di Huang
  * @author josephtLeiferman
  */
 public class TestMaster {
@@ -38,9 +23,7 @@ public class TestMaster {
 		// Doing unit test
 		Floor F = new MockFloor();
 		
-		Belt B = new MockBelt(F);
-		
->>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
+		MockBelt B = new MockBelt(F);
 		RobotScheduler R = new RobotScheduler(2);
 		Point robotP = new Point(0,3);
 		MockRobot r001= new MockRobot("001", robotP, R );

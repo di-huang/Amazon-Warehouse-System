@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-<<<<<<< HEAD
 import production.Report;
 import production.Tickable;
 import production.Floor;
 import production.MockFloor.Directions;
 import production.Point;
-=======
 import production.MockFloor.Directions;
->>>>>>> branch 'master' of https://github.com/dhuang12138/CS2820.git
 
 
 /**
