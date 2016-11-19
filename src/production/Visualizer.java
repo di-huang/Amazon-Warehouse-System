@@ -12,7 +12,7 @@ import production.Floor;
 
 public class Visualizer extends JFrame implements Tickable{
 
-	public static final int WIDTH = 665, HEIGHT = 415;						// unit: pixel
+	public static final int WIDTH = 700, HEIGHT = 500;						// unit: pixel
 	public static final String TITLE = "Warehouse System";
 	
 	private Floor F;
@@ -23,15 +23,33 @@ public class Visualizer extends JFrame implements Tickable{
 		
 		private Screen(){
 			this.setBackground(Color.BLUE);
-			this.setBounds(30, 50, width, height);
+			this.setBounds(10, 10, width, height);
 			this.setVisible(true);
+			
 		}
 
-//		@Override
-//		protected void paintComponent(Graphics g) {
-//			super.paintComponent(g);
-//			g.drawLine(0, F.gridSize, width, F.gridSize);
-//		}
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			for(Point warehouseObject: MockFloor.FLOOR_LOCATIONS.values()) {
+				if( warehouseObject.getName() == "ROBOT") {
+					g.fillOval(warehouseObject.getX()*100, warehouseObject.getY()*100, 10, 10);
+					g.setColor(Color.GREEN);
+					System.out.println("found robot");
+				}
+				g.drawRect(warehouseObject.getX()*100, warehouseObject.getY()*100, 10, 10);
+				g.setColor(Color.BLACK);
+			}
+			for(Point beltObject: MockFloor.PACKERBELT) {
+				g.drawRect(beltObject.getX()*100, beltObject.getY()*100, 10, 10);
+				g.setColor(Color.BLACK);
+			}
+			for(Point beltObject: MockFloor.PICKERBELT) {
+				g.drawRect(beltObject.getX()*100, beltObject.getY()*100, 10, 10);
+				g.setColor(Color.BLACK);
+			}
+			
+		}
 		
 	}
 
@@ -39,6 +57,7 @@ public class Visualizer extends JFrame implements Tickable{
 		this.F = F;
 		initialize();
 	}
+	
 	
 	private void initialize(){
 		this.setTitle(TITLE);

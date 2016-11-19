@@ -50,11 +50,14 @@ public class FloorTest {
 		assertEquals(notInFloor,f.FLOOR_LOCATIONS.get("SHELVE_1"));
 		//testing get route
 		ArrayList<MockFloor.Directions> expectedRoute = new ArrayList<>();
-		Point shelve1 = new Point(2,2,"shelve_1");
-		Point charger2 = new Point(3,0,"charger2");
-		expectedRoute.add(MockFloor.Directions.RIGHT);
-		expectedRoute.add(MockFloor.Directions.UP);
-		expectedRoute.add(MockFloor.Directions.UP);
+		Point shelve1 = new Point(5,0,"shelve_1");
+		Point charger2 = new Point(1,2,"charger2");
+		expectedRoute.add(MockFloor.Directions.LEFT);
+		expectedRoute.add(MockFloor.Directions.DOWN);
+		expectedRoute.add(MockFloor.Directions.LEFT);	
+		expectedRoute.add(MockFloor.Directions.DOWN);
+		expectedRoute.add(MockFloor.Directions.LEFT);
+		expectedRoute.add(MockFloor.Directions.LEFT);
 		assertEquals(expectedRoute, Floor.getRoute(shelve1,charger2));
 		
 		

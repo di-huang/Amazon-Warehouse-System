@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class MockFloor implements Floor {
 	public static Point SHELVE_1 = new Point(2,2,"SHELVE_1"); // (x,y) coordinates location
     public static Point SHELVE_2 = new Point(3,2,"SHELVE_2"); // (x,y) coordinates location
-    public static Point ROBOT = new Point(2,0,"ROBOT"); // start robot on charger 
+    public static Point ROBOT = new Point(5,1,"ROBOT"); // start robot on charger 
     public static final Point CHARGER_1 = new Point(2,0,"CHARGER_1");
     public static final Point CHARGER_2 = new Point(3,0,"CHARGER_2"); 
     public static final Point RECEIVING_DOCK = new Point(5,0,"RECEIVING_DOCK");
@@ -34,7 +34,7 @@ public class MockFloor implements Floor {
     public enum Directions {
         UP,DOWN,LEFT,RIGHT
     }
-    HashMap<String,Point> FLOOR_LOCATIONS = new HashMap<>();
+    public static HashMap<String,Point> FLOOR_LOCATIONS = new HashMap<>();
     
     // initially just statically create these objects
     public MockFloor() {
