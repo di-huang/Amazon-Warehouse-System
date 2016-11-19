@@ -3,7 +3,6 @@ package production;
 import org.junit.Test;
 
 /**
- * 
  * @author Di Huang
  * @author josephtLeiferman
  */
