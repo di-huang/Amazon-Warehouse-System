@@ -13,7 +13,7 @@ public class OrderControl implements Tickable {
 	 * orders are held in a queue
 	 * 
 	 */
-	private LinkedList<Order> orderQueue;
+	private LinkedList<Order> orderQueue = new LinkedList<>();
 	private ItemController itemController;
 	private RobotScheduler robotScheduler;
 	

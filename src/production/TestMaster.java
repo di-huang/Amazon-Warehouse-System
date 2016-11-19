@@ -23,7 +23,7 @@ public class TestMaster {
 	@Test
 	public void test000() {	
 		// Doing unit test
-		Floor F = new MockFloor();
+		MockFloor F = new MockFloor();
 		MockBelt B = new MockBelt(F);
 		RobotScheduler R = new RobotScheduler(2);
 		Point robotP = new Point(0,3);

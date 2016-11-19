@@ -20,8 +20,8 @@ import production.Order;
 //github.com/dhuang12138/CS2820.git
 public class MockBelt implements Belt {
    int mockTick = 0;
-   Floor F;
-   List<Point> beltarea;
+   MockFloor F;
+   ArrayList<Point> beltarea = new ArrayList<Point>();
    Point p = new Point(0,0, "mock");
 
   /**
@@ -29,21 +29,20 @@ public class MockBelt implements Belt {
    * @param Floor object.
    * Floor is needed to find location of belt area, cells etc.
    */
-  public MockBelt(Floor F) {
-	  Point f1 = new Point(0,0,"beltStart");
-	  Point f2 = new Point(20,0, "beltEnd");
-	this.F = F;
+  public MockBelt(MockFloor F) {
+	  Point f1 = new Point(0,5,"beltStart");
+	  Point f2 = new Point(0,2, "beltEnd");
+	  this.F = F;
 
-	beltarea.add(f1);
-	beltarea.add(f2);
-	 
-    }
+	  beltarea.add(f1);
+	  beltarea.add(f2);
+}
   
   /**
    * the tick() method is where belt moving gets done;
-   * it will have to move any Bin or Parcel withing the Cell
+   * it will have to move any Bin or Parcel within the Cell
    * of a Belt area to the next Cell, and this has to be done
-   * on all Points of the beltarea in parallel (not coded yet here)
+   * on all Points of the belt area in parallel (not coded yet here)
    * 
    * after moving the belt, tick() should check to see whether
    * or not a Bin has arrived at the Packer - then doPacker() 
@@ -104,6 +103,7 @@ public class MockBelt implements Belt {
   public boolean binAvailable() {
 	return false;
     }
+  
   /**
    * Called by Orders to simulate a Picker starting a new Bin
    */

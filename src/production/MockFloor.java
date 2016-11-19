@@ -16,11 +16,14 @@ public class MockFloor implements Floor {
     public static final Point RECEIVING_DOCK = new Point(5,0,"RECEIVING_DOCK");
     public static final Point PICKER = new Point(1,5,"PICKER");
     public static final Point PACKER = new Point(1,2,"PACKER");
-    public static final int[][] BELT = {{0,0,0,0,0,0},{0,1,2,3,4,5}}; // entire belt line
+    public static Point[] PICKERBELT = { new Point(0,5,"PICKERBELT5"),new Point(0,4,"PICKERBELT4"),new Point(0,3,"PICKERBELT3") };
+    public static Point[] PACKERBELT = { new Point(0,2,"PICKERBELT2"),new Point(0,1,"PICKERBELT1"),new Point(0,0,"PICKERBELT0") };
+   
     public static final int UPPERB = 5;
     public static final int LOWERB = 0;
     
     /** Directions will be used for the route creating
+     *
     *you can parse the route as follows 
     *<p>
     * UP = y + 1 
