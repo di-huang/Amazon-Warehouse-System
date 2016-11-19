@@ -2,7 +2,6 @@ package production;
 
 import org.junit.Test;
 
-import production.Belt;
 import production.Floor;
 import production.MockFloor;
 import production.Point;
@@ -13,7 +12,6 @@ import production.OrderControl;
 import production.MockRobot;
 import production.RobotScheduler;
 import production.Visualizer;
-import production.Position;
 
 /**
  * 
