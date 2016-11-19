@@ -57,7 +57,7 @@ public class MockBelt implements Belt {
    * even fancier ideas are to give the Packer a queue of Bins
    * and remove each Bin that arrives, taking some non-trivial
    * number of ticks to make Parcels, returning them to the 
-   * beltarea when they are completed
+   * belt area when they are completed
    * 
    * and a really thorough Belt would simulate the shipping dock,
    * collecting a lot of parcels and grouping them into a truck

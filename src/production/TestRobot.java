@@ -13,8 +13,8 @@ public class TestRobot {
 		//However, due to the situation that i don't have the working Floor Subsystem, the route that the robot have is always the same
 		//You can check out that route in MockRobot.java , it is like just "left left left left left" or "up up up up up"
 		//(in fact there is no difference between the charging and moving shelf pattern)
-		rs.addRobot(new MockRobot("001",new Position(0,3),rs));
-		rs.addRobot(new MockRobot("002",new Position(3,0),rs));
+		rs.addRobot(new MockRobot("001",new Point(0,3),rs));
+		rs.addRobot(new MockRobot("002",new Point(3,0),rs));
 		for(int a=0;a<13;a++) {
 			Thread.sleep(2500);
 			rs.tick(a);
