@@ -21,7 +21,7 @@ public class MockBelt implements Belt {
    ArrayList<Point> beltarea = new ArrayList<Point>();
    Point p = new Point(0,0, "mock");
 
-  public MockBelt(MockFloor F) {
+   public MockBelt(MockFloor F) {
 	  Point f1 = new Point(0,5,"beltStart");
 	  Point f2 = new Point(0,2, "beltEnd");
 	  this.F = F;
