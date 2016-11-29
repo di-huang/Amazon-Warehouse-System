@@ -1,4 +1,11 @@
-package production;
+
+
+package warehouse_system.inventory;
+/**
+ * @author Wangyang Xu
+ * establish an item database, including the basic imformation about the item.
+ */
+ 
 
 public class Item {
 	
@@ -22,15 +29,6 @@ public class Item {
 	public String toString() {
 		return this.name;
 		
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	public String getName() {
-		return name;
-	}
-	public double getWeight() {
-		return weight;
 	}
 
 }

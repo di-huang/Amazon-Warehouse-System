@@ -1,9 +1,16 @@
-package production;
+package warehouse_system.inventory;
 
 import java.util.HashMap;
-import production.Order;
-import production.Report;
 
+import warehouse_system.Report;
+import warehouse_system.orders.Order;
+
+
+/**
+ * @author wangyang xu 
+ * it is item control system, including checking item available, adding item, reduece item quantity.
+ */
+ 
 public class ItemController {
 	/**
 	 * This works as the inventory subsystem
@@ -19,12 +26,14 @@ public class ItemController {
 	}
 	
 	public void addItem(Item i){
-		inventory.put(i.getName(), i);
+		inventory.put(i.name, i);
+		// if the quantity of the item lower then the minimum (set by administrator), we should additem
 	}
-
+	
 	public boolean itemAvailable(Item i) {
 		if (!inventory.containsKey(i.name)) {
 			return false; }
 		return inventory.get(i.name).quantity >= i.quantity;
+		// check whether the item and the quantity of the item can meet the requirement of order
 	}
 }
