@@ -7,15 +7,13 @@ public class Order {
     /**
     * used _ to differentiate from previously existing Order class for now 
     */
-    //public final String serial;
-    //public String itemName;
 	public Item itemBeingOrdered;
     public String shippingAddress;
     public Integer quantity;
    
     
     /**
-     * @author charlesc3929
+     * @author Charles Carlson
      * @param itemName
      * @param itemName
      * @param shippingAddress
@@ -52,7 +50,7 @@ public class Order {
     }
     
     public String getItemBeingOrderedName() {
-    	return this.itemBeingOrdered.getName();
+    	return this.itemBeingOrdered.toString();
     }
     
     public String getItemBeingOrderedNameString() {
