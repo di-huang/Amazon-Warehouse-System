@@ -24,7 +24,9 @@ public class OrderControl implements Tickable {
 	
 	/**
 	 * 
-	 * Mock Orders
+	 * mock Orders
+	 * these 9 mock Items all exist in the inventory, so there will never be a case where the Item field 
+	 * of an Order cannot be filled, just for now 
 	 * 
 	 */
 	Item RED_SHIRT = new Item("RED_SHIRT", 200, "1");
@@ -56,6 +58,8 @@ public class OrderControl implements Tickable {
 	 * 
 	 * @param itemController
 	 * @param robotScheduler
+	 * probably Belt soon
+	 * 
 	 */
 	public OrderControl(ItemController I, RobotScheduler R) {
 		this.I = I;
@@ -117,6 +121,10 @@ public class OrderControl implements Tickable {
 			return; //tick
 		}
 		
+		/**
+		 * 
+		 * method doesn't exist yet
+		 */
 		R.requestShelf(currentOrderShelf,(Picker)this);
 		return;//tick
 		
