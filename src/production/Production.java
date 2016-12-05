@@ -24,12 +24,23 @@ public class Production {
 		I.addItem(new Item("apple", 5, "777"));
 		I.addItem(new Item("banana", 5, "778"));
 		
-		OrderControl O = new OrderControl(I, R);
-		Item testItem1 = new Item("apple", 1, "1");
-		Item testItem2 = new Item("banana", 1, "2");
+		/**
+		 * adds 9 mock items to inventory
+		 * 
+		 */
 		
-		O.addOrder(new Order(testItem1, 1, "Clinton St"));
-		O.addOrder(new Order(testItem2, 1, "Johnson St"));
+		I.addItem(new Item("RED_SHIRT", 200, "1"));
+		I.addItem(new Item("BLUE_SHIRT", 300, "1"));
+		I.addItem(new Item("BICYCLE", 2, "2"));
+		I.addItem(new Item("BASKETBALL", 50, "2"));
+		I.addItem(new Item("SHAVING_CREAM", 10, "3"));
+		I.addItem(new Item("DUCT_TAPE", 1, "3"));
+		I.addItem(new Item("BOOK", 20, "4"));
+		I.addItem(new Item("EGG_PLANT", 2000, "5"));
+		I.addItem(new Item("FLUTE", 5, "6"));
+		
+		
+		OrderControl O = new OrderControl(I, R);
 		
 		Visualizer V = new Visualizer(F);
 		

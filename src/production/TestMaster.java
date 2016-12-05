@@ -40,6 +40,9 @@ public class TestMaster {
 		Item testItem1 = new Item("apple", 1, "1");
 		Item testItem2 = new Item("banana", 1, "2");
 		
+		O.addOrder(new Order(testItem1, 1, "Clinton St"));
+		O.addOrder(new Order(testItem2, 1, "Johnson St"));
+		
 		Visualizer V = new Visualizer(F);
 		
 		Master M = new Master(B, F, I, O, R, V);

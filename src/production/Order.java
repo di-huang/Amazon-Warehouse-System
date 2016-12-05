@@ -35,6 +35,7 @@ public class Order {
      * 
      * following methods are straightforward getters and setters
      * there are also getters for the fields of the Item of the Order
+     * Alot of these don't get used by are there just incase
      * 
      */
     
