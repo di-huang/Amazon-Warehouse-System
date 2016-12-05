@@ -124,9 +124,11 @@ public class OrderControl implements Tickable {
 		/**
 		 * 
 		 * method doesn't exist yet
+		 * commented out for the sake of errors
+		 * 
 		 */
-		R.requestShelf(currentOrderShelf,(Picker)this);
-		return;//tick
+		/*R.requestShelf(currentOrderShelf,(Picker)this);
+		return;//tick*/
 		
 	}
 }
