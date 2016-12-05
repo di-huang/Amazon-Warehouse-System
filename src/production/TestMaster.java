@@ -36,7 +36,7 @@ public class TestMaster {
 		I.addItem(new Item("apple", 5, "777"));
 		I.addItem(new Item("banana", 5, "778"));
 		
-		OrderControl O = new OrderControl(I, R);
+		OrderControl O = new OrderControl(I, R, B);
 		Item testItem1 = new Item("apple", 1, "1");
 		Item testItem2 = new Item("banana", 1, "2");
 		

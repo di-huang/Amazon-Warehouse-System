@@ -40,7 +40,7 @@ public class Production {
 		I.addItem(new Item("FLUTE", 5, "6"));
 		
 		
-		OrderControl O = new OrderControl(I, R);
+		OrderControl O = new OrderControl(I, R, B);
 		
 		Visualizer V = new Visualizer(F);
 		

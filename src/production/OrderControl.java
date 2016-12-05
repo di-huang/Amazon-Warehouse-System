@@ -20,6 +20,7 @@ public class OrderControl implements Tickable {
 	private LinkedList<Order> orderQueue;
 	private ItemController I;
 	private RobotScheduler R;
+	private MockBelt B;
 	private Order currentOrder;
 	
 	/**
@@ -61,9 +62,10 @@ public class OrderControl implements Tickable {
 	 * probably Belt soon
 	 * 
 	 */
-	public OrderControl(ItemController I, RobotScheduler R) {
+	public OrderControl(ItemController I, RobotScheduler R, MockBelt B) {
 		this.I = I;
 		this.R = R;
+		this.B = B;
 		
 		orderQueue = new LinkedList<>();
 		}
@@ -116,6 +118,7 @@ public class OrderControl implements Tickable {
 		}
 	
 		String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
+		//String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
 		if(currentOrderShelf == null) { 
 			System.out.println("Item not in inventory");
 			return; //tick
@@ -129,6 +132,17 @@ public class OrderControl implements Tickable {
 		 */
 		/*R.requestShelf(currentOrderShelf,(Picker)this);
 		return;//tick*/
+		
+		/**
+		 * 
+		 * create a new bin, put the Order in the bin, mark the order as finished
+		 * for now, probably won't keep
+		 * 
+		 */
+		if(B.binAvailable()) {
+			B.getBin();
+		}
+		
 		
 	}
 }
