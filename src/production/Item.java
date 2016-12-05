@@ -1,6 +1,6 @@
+package production;
 
 
-package warehouse_system.inventory;
 /**
  * @author Wangyang Xu
  * establish an item database, including the basic imformation about the item.

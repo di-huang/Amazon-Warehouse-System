@@ -1,9 +1,9 @@
-package warehouse_system.inventory;
+package production;
 
 import java.util.HashMap;
 
-import warehouse_system.Report;
-import warehouse_system.orders.Order;
+import production.Report;
+import production.Order;
 
 
 /**

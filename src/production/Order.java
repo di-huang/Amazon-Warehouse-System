@@ -59,7 +59,8 @@ public class Order {
     }
     
     public String getItemBeingOrderedShelfID() {
-    	return this.itemBeingOrdered.shelfID;
+    	if(this.itemBeingOrdered.shelfID!=null) { return this.itemBeingOrdered.shelfID; }
+    	else { return null; }
     }
     
     public String getShippingAddress() {
