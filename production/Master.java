@@ -26,10 +26,11 @@ public class Master implements Runnable {
 		O = o;
 		R = r;
 		V = v;
+		V.givenMaster(this);
 	}
+	int tick = 0;
 	@Override
 	public void run() {
-		int tick = 0;
 		while (running && tick < limit) {
 			System.out.println("tick " + tick);
 			tick(tick);
@@ -44,6 +45,9 @@ public class Master implements Runnable {
 	 * provide some available operations for user
 	 */
 	public void start() {
+		if(running == true){
+			return;
+		}
 		running = true;
 		new Thread(this).start();
 	}
