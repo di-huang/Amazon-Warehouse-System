@@ -25,7 +25,7 @@ public class Production {
 		I.addItem(new Item("banana", 5, "778"));
 		
 		/**
-		 * adds 9 mock items to inventory
+		 * adds 9 items to inventory
 		 * 
 		 */
 		
