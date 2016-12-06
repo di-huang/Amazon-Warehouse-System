@@ -87,7 +87,7 @@ public class Master implements Runnable {
 	private void tick(int tick){
 		O.tick(tick);							// getting orders
 		R.tick(tick);              // updating RobotScheduler to control robots
-		B.tick(tick);
+		B.tick(tick);                //tick through the belt
 		V.tick(tick);				// repainting everything
 		
 	}
