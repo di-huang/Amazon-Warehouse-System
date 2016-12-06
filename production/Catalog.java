@@ -52,6 +52,6 @@ class ItemInfo{
 	}
 	@Override
 	public String toString() {
-		return "ID: " + ID + "; description: " + description;
+		return "(" + ID + "-" + description + ") ";
 	}
 }
