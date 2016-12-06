@@ -1,1 +1,2 @@
 This could be a final version of warehouse simulation.
+This production works fine for me,  can test it and add myouore useful code (tag your contributions in comment) if you want (just dont make it generate errors or bugs).
