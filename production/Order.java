@@ -39,5 +39,14 @@ public class Order {
 				quantity++;
 		return quantity;
 	}
+	@Override
+	public String toString() {
+		String s = "Order[“ + address + “; ”;
+		for(ItemSlot is : itemSlots){
+			s += is.itemInfo;
+		}
+		s += “]”;
+		return s;
+	}
 }
 
