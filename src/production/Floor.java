@@ -6,7 +6,7 @@ import java.util.LinkedList;
 /**
  * 
  * @author josephtleiferman, dihuang
- * Floor mainly works for layout purpose
+ * 
  *
  */
 public class Floor {
