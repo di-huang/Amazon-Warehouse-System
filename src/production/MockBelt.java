@@ -21,6 +21,8 @@ public class MockBelt implements Belt {
    ArrayList<Point> beltarea = new ArrayList<Point>();
    Point p = new Point(0,0, "mock");
    Cell c2;
+   Bin b1;
+   ArrayList<Bin> binList = new ArrayList<Bin>();
    
    public MockBelt(){
      
@@ -29,8 +31,7 @@ public class MockBelt implements Belt {
    public MockBelt(MockFloor F) {
 	Point f1 = new Point(0,0,"pickStart");
 	Point f2 = new Point(0,19, "beltEnd");
-	  this.F = F;
-	  
+
 	 
 
 	//  beltarea.add(f1);
@@ -64,6 +65,31 @@ public class MockBelt implements Belt {
    */
   public void tick(int count) {
 	  count = count + 1;
+	  Bin currentBin = getBin();
+		Point oP = new Point(0,0, "Bin");
+		  this.F = F;
+		  binList.add(getBin());
+//		  binList.add(getBin());
+//		  boolean binCheck;
+//		  binCheck = c2.isBin(oP);
+		  if(oP.getName() == "Bin"){
+			  //System.out.println("It is a bin");
+	//		  Bin newBin = new Bin();
+//			  binList.add(newBin);
+			  System.out.println("current bins: " + binList.toString());
+		  }
+		  else{
+			  System.out.println("Not WORKING");
+		  }
+	  
+	  
+	  
+	  //bin or parcel needs to be moved here
+	  //will be moved to the next cell
+	  //for(int i = 0; i<pickerbeltsize; i++){
+	  //      
+	  //
+	  //}
     }
   
   /**
@@ -102,10 +128,11 @@ public class MockBelt implements Belt {
    */
   public boolean binAvailable() {
 	return false;
+	//if (0,0) doesn't have a bin, return true
     }
  
   public Bin getBin() {
-	return null; 
+	return new Bin(); 
     }
   
   public void beltContents(Point p){

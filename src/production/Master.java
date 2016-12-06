@@ -26,6 +26,8 @@ public class Master implements Runnable {
 	private OrderControl O;
 	private RobotScheduler R;
 	private Visualizer V;
+	
+	
 	/**
 	 * add all components here for possible unit test
 	 */
@@ -84,8 +86,10 @@ public class Master implements Runnable {
 	 */
 	private void tick(int tick){
 		O.tick(tick);							// getting orders
-		R.tick(tick);							// updating RobotScheduler to control robots
-		V.tick(tick);						    	// repainting everything
+		R.tick(tick);              // updating RobotScheduler to control robots
+		B.tick(tick);
+		V.tick(tick);				// repainting everything
+		
 	}
 	
 }

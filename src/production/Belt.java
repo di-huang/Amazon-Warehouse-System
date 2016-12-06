@@ -28,6 +28,9 @@ public interface Belt {
   String pack2 = pickBelt[4].getName();
   String pack3 = pickBelt[5].getName();
   
+  public void tick(int count);
+ // private boolean isMovable();
+  
 //   public static String getBeltItem(Point p){
 //	   return p.getName();
 //   }

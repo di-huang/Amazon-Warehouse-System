@@ -29,13 +29,22 @@ public class Bin  {
     //for binList, 0 is starting position, 19 is last position
     Order order;
 	boolean finished = false;
+	int idnum = 0;
+	
 	public Bin() {
 		order = null;
 		finished = false;
+		
+		//Create random number 0 - 99
+		double randNumber = (Math.random() * 100);
+		idnum = (int)randNumber; 
+
+		
 	}
-	public Bin(Order o){
+	public Bin(Order o, int id){
 		order = o;
 		finished = false;
+		idnum = id;
 	}
 	public boolean isFinished(){
 		//if order = bin then it is finished
@@ -67,7 +76,7 @@ public class Bin  {
     public void addBin(Order o){
     	setFinished();
     	Order myOrd = o;
-    	Bin b = new Bin(o);
+    //	Bin b = new Bin(o);
     }
     
     //this is where orders will be saved to a bin, will need to wait
