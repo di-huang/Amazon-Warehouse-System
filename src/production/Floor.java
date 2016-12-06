@@ -92,7 +92,8 @@ public class Floor {
 	 */
    
     public static HashMap<String,Point> FLOOR_LOCATIONS = new HashMap<>();
-   // initially just statically create these objects
+   
+    // initially just statically create these objects
    public Floor() {
 	   FLOOR_LOCATIONS.put("SHELVE_1",SHELVES[0].getPos());
        FLOOR_LOCATIONS.put("SHELVE_2",SHELVES[1].getPos());
@@ -101,9 +102,25 @@ public class Floor {
        FLOOR_LOCATIONS.put("PICKER",PICKER);
        FLOOR_LOCATIONS.put("PACKER",PACKER);
    }
+   
+   /**
+    *Given a string l getLocation(String l) will return a Point 
+    *storing the location of that object or null if not a valid object
+    *<p>
+    *
+    *@param l string containing locations name 
+    *@return Point location of the object (x,y)
+    */
    public Point getLocation(String l) {
        return FLOOR_LOCATIONS.get(l);
    }
+   
+   /** 
+    * return true or false depending on if an object is at location [x,y] in Point 
+    * <p>
+    * @param l a Point [x,y] of objects location  
+    * @return boolean whether an object is at a given [x,y]
+    */
    public boolean objectAt(Point l) {
        for(Point x: FLOOR_LOCATIONS.values() ) {
            if(x.getX() == l.getX() && x.getY()== l.getY()) {
@@ -112,6 +129,12 @@ public class Floor {
        }
        return false;
    }
+   /** updates location of a given shelf
+    * 
+    * @param object the shelves name
+    * @param location the location of shelf
+    * 
+    */
    public void updateObjectLocation(String object, Point location) { 
        Point newLocation = FLOOR_LOCATIONS.get(object);
        newLocation = location;
@@ -121,12 +144,15 @@ public class Floor {
    }
 }
 
-/**
- * 
- * @author josephtleiferman
- *
- *
- */
+/** Directions will be used for the route creating
+*
+*you can parse the route as follows 
+*<p>
+* UP = y + 1 
+* DOWN = y - 1
+* LEFT = x - 1
+* RIGHT = x + 1
+*/
 enum Directions {
     UP,DOWN,LEFT,RIGHT
 }
