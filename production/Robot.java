@@ -90,6 +90,7 @@ public class Robot implements Tickable{
 						for(ItemSlot is : currO.getItemSlots()){
 							for(Item i : itemsOnShelf){
 								if(i.match(is)){
+									System.out.println("Putting " + i + "in the bin.");
 									is.setItem(i);
 									ItemControl.removeItem(i, shelf);
 									break;
@@ -107,6 +108,7 @@ public class Robot implements Tickable{
 						shelf.putdown();
 						ItemInfo nxtinfo = currO.getUnfilledItemInfo();
 						if(currO.isAllFilled()){
+							System.out.println("Current order is fulfilled!");
 							currO = null;
 						}
 						if(nxtinfo == null){
