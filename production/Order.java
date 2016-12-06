@@ -41,11 +41,11 @@ public class Order {
 	}
 	@Override
 	public String toString() {
-		String s = "Order[“ + address + “; ”;
+		String s = "Order[" + address + "; ";
 		for(ItemSlot is : itemSlots){
 			s += is.itemInfo;
 		}
-		s += “]”;
+		s += "]";
 		return s;
 	}
 }
