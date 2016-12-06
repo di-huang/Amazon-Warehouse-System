@@ -6,4 +6,5 @@ Charles Carlson (Orders) <br />
 Wangyang Xu (Inventory) <br />
 Di Huang (Master) <br />
 
-We can discuss each other's progress and problems using Issues.
+Current Questions:
+Do we have to keep interface-mockObject pattern in final production?
