@@ -12,7 +12,7 @@ public class RobotScheduler implements Tickable{
 	 */
 	public RobotScheduler(){
 		robots = new Robot[1];
-		robots[0] = new Robot(Floor.CHARGER);
+		robots[0] = new Robot("0", Floor.CHARGER);
 	}
 	@Override
 	public void tick(int tick) {
