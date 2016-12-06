@@ -8,14 +8,14 @@ import java.util.LinkedList;
  *
  */
 public class OrderControl implements Tickable{
-	static final LinkedList<Order> orderQueue = new LinkedList<Order>();
+	private static final LinkedList<Order> orderQueue = new LinkedList<Order>();
 	public OrderControl(){
-		// generate orders for testing
+		// schedule orders for testing
 		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(0)), new ItemSlot(Catalog.at(3))}));	// pen, fork
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0))}));	// paper, pen
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	// book
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(5))})); // plate
+		orderQueue.add(new Order("b st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
+		orderQueue.add(new Order("c st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0))}));	// paper, pen
+		orderQueue.add(new Order("d st", new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	// book
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(5))})); // plate
 		// ...
 	}
 	/**
@@ -29,7 +29,10 @@ public class OrderControl implements Tickable{
 	 * orderQueue holds scheduled orders; pendingOrders holds the orders which already arrived
 	 * and are waitting for system to process
 	 */
-	public static LinkedList<Order> pendingOrders = new LinkedList<Order>();
+	private static LinkedList<Order> pendingOrders = new LinkedList<Order>();
+	public static LinkedList<Order> getPendingOrders(){
+		return pendingOrders;
+	}
 	private int lasttick = -1;
 	private int Tick = 0;
 	@Override
@@ -61,7 +64,7 @@ public class OrderControl implements Tickable{
 		if(suspend(10,tick)){	// poll an order every 10 ticks
 			Order currO = orderQueue.poll();
 			for(ItemSlot is : currO.getItemSlots()){
-				System.out.println("Information of new order: " + is.itemInfo);
+				System.out.println("New order - New order - New order: " + is.itemInfo);
 			}
 			if(!ItemControl.itemsAvailable(currO)){
 				System.out.println("There is no plenty stock for this order right now.");
@@ -70,11 +73,6 @@ public class OrderControl implements Tickable{
 			}
 			System.out.println("New order is in pending.");
 			pendingOrders.add(currO);
-		}
-		for(Order o : pendingOrders){
-			if(o.isAllFilled()){
-				pendingOrders.remove(o);
-			}
 		}
 	}
 }
