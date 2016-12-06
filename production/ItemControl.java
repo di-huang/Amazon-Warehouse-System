@@ -69,7 +69,7 @@ public class ItemControl implements Tickable {
 	 * @author Ted Herman, Di Huang
 	 */
 	public static Shelf findItem(ItemInfo info) {
-		System.out.println("Finding item on shelves...: " + info);
+		System.out.println("Finding item"+info+"on shelves...");
 		for (Item e : stock) {
 			if (!e.getHolder().onFloor())
 				continue; // ignore moving shelves
