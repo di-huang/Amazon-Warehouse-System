@@ -13,7 +13,9 @@ public class Robot implements Tickable{
 	State state;
 	Shelf shelf;
 	Order currO;
-	public Robot(Point p) {
+	String ID;
+	public Robot(String id, Point p) {
+		ID = id;
 		pos = p;
 		route = null;
 		state = State.IDLE;
@@ -47,8 +49,9 @@ public class Robot implements Tickable{
 	@Override
 	public void tick(int tick) {
 		Tick = tick;
-		System.out.println("Robot_"+"state:"+state);
-		System.out.println("Robot_"+"position:"+pos);
+		System.out.println(this+"_position: "+pos);
+		System.out.println(this+"_state: "+state);
+		System.out.println(this+"_order: "+currO);
 		if(tick == 0){
 			return;
 		}
@@ -70,7 +73,7 @@ public class Robot implements Tickable{
 				break;
 			case HeadingToShelf:
 				if(pos.equals(end)){
-					System.out.println("Robot is picking up the shelf...");
+					System.out.println(this+" is picking up the shelf...");
 					if(suspend(1,tick)){
 						shelf.pickup();
 						state = State.HeadingToPicker;
@@ -90,7 +93,7 @@ public class Robot implements Tickable{
 						for(ItemSlot is : currO.getItemSlots()){
 							for(Item i : itemsOnShelf){
 								if(i.match(is)){
-									System.out.println("Putting " + i + "in the bin.");
+									System.out.println("Picker put " + i + "in the bin.");
 									is.setItem(i);
 									ItemControl.removeItem(i, shelf);
 									break;
@@ -103,7 +106,7 @@ public class Robot implements Tickable{
 				break;
 			case ReturningShelf:
 				if(pos.equals(end)){
-					System.out.println("Robot is putting down the shelf...");
+					System.out.println(this+" is putting down the shelf...");
 					if(suspend(1,tick)){
 						shelf.putdown();
 						ItemInfo nxtinfo = currO.getUnfilledItemInfo();
@@ -128,7 +131,7 @@ public class Robot implements Tickable{
 				break;
 			case GoToCharge:
 				if(pos.equals(end)){
-					System.out.println("Robot is at charger station...");
+					System.out.println(this+" is at charger station...");
 					if(suspend(1,tick)){
 						state = State.IDLE;
 					}
@@ -141,7 +144,10 @@ public class Robot implements Tickable{
 			shelf.setPos(pos);
 		}
 	}
-
+	@Override
+	public String toString() {
+		return "Robot"+ID;
+	}
 	public Point nextpoint(Point pos,Directions d) {
 		if(d==Directions.DOWN) {
 			return new Point(pos.getX(), pos.getY()+1);
