@@ -99,7 +99,6 @@ class Parcel {
 	public final Order order;
 	private Point point;
 	public final int width = 10;
-	public final Color color = Color.PINK;
 	public Parcel(Order order, Point point){
 		this.order = order;
 		this.point = point;
@@ -121,7 +120,6 @@ class Bin{
     public final Order order;
 	private Point point;
 	public final int width = 10;
-	public final Color color = Color.ORANGE;
 	public Bin(Order order, Point point){
 		this.order = order;
 		this.point = point;
