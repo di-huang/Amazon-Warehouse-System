@@ -55,7 +55,7 @@ public class Robot implements Tickable{
 		switch(state){
 			case IDLE:
 				route = null;
-				LinkedList<Order> pendingOrders = OrderControl.pendingOrders;
+				LinkedList<Order> pendingOrders = OrderControl.getPendingOrders();
 				if(!pendingOrders.isEmpty() && currO == null){
 					currO = pendingOrders.poll();
 					Shelf target = ItemControl.findItem(currO.getUnfilledItemInfo());
