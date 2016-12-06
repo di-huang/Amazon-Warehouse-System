@@ -63,9 +63,7 @@ public class OrderControl implements Tickable{
 		Tick = tick;
 		if(suspend(10,tick)){	// poll an order every 10 ticks
 			Order currO = orderQueue.poll();
-			for(ItemSlot is : currO.getItemSlots()){
-				System.out.println("New order - New order - New order: " + is.itemInfo);
-			}
+			System.out.println("=New Order=: " + currO);
 			if(!ItemControl.itemsAvailable(currO)){
 				System.out.println("There is no plenty stock for this order right now.");
 				orderQueue.add(currO);	// re-order right now
