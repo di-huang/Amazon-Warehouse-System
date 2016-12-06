@@ -33,10 +33,16 @@ public class Bin  {
 		order = null;
 		finished = false;
 	}
+	public Bin(Order o){
+		order = o;
+		finished = false;
+	}
 	public boolean isFinished(){
+		//if order = bin then it is finished
 		return finished;
 	}
 	public void setFinished(){
+		//if order = bin then it is finished
 		finished = true;
 		System.out.println("Order is finished");
 	}
@@ -56,6 +62,12 @@ public class Bin  {
     }
     public void setOrder(Order o) { 
     	order = o; 
+    }
+    
+    public void addBin(Order o){
+    	setFinished();
+    	Order myOrd = o;
+    	Bin b = new Bin(o);
     }
     
     //this is where orders will be saved to a bin, will need to wait

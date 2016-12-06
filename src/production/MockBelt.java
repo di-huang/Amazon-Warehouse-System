@@ -1,4 +1,4 @@
-package production;
+ package production;
 
 //import warehouse_system.floor.*;
 //import warehouse_system.orders.*;
@@ -20,14 +20,22 @@ public class MockBelt implements Belt {
    MockFloor F;
    ArrayList<Point> beltarea = new ArrayList<Point>();
    Point p = new Point(0,0, "mock");
+   Cell c2;
+   
+   public MockBelt(){
+     
+   }
 
    public MockBelt(MockFloor F) {
-	  Point f1 = new Point(0,5,"beltStart");
-	  Point f2 = new Point(0,2, "beltEnd");
+	Point f1 = new Point(0,0,"pickStart");
+	Point f2 = new Point(0,19, "beltEnd");
 	  this.F = F;
+	  
+	 
 
-	  beltarea.add(f1);
-	  beltarea.add(f2);
+	//  beltarea.add(f1);
+	//  beltarea.add(f2);
+	//  beltContents(F.PACKERBELT[1]);
 }
   
   /**
@@ -99,4 +107,11 @@ public class MockBelt implements Belt {
   public Bin getBin() {
 	return null; 
     }
+  
+  public void beltContents(Point p){
+     // String s1 = c2.getCell(p);
+      String r = p.getName();
+      System.out.println(" belt contents: " + r);
+      //return r;
+  }
 }
