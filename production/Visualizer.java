@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -17,9 +18,12 @@ import javax.swing.JPanel;
 public class Visualizer implements Tickable{
 	public static final String TITLE = "Warehouse System";
 	private Screen screen;
-	
+	private Master M;
 	public Visualizer(){
 		createAndShowGUI();
+	}
+	public void givenMaster(Master M){
+		this.M = M;
 	}
 	private void createAndShowGUI(){
 		JFrame f = new JFrame("Warehouse System");
@@ -28,9 +32,27 @@ public class Visualizer implements Tickable{
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		screen = new Screen();
-		
+		JButton start_jb = new JButton("Start");
+		start_jb.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				M.start();
+			}
+		});
+		JButton stop_jb = new JButton("Stop");
+		stop_jb.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				M.stop();
+			}
+		});
+		screen.add(start_jb);
+		screen.add(stop_jb);
 		f.add(screen);
 		f.pack();
+		f.setAlwaysOnTop(true);
 		f.setVisible(true);
 	}
 	/**
@@ -122,6 +144,7 @@ public class Visualizer implements Tickable{
 		 * @param (x,y), g
 		 */
 		void paintBelt(int x, int y, Graphics g){
+			g.setColor(Color.BLACK);
 			int X = offset + x*gridSize;
 			int Y = offset + y*gridSize;
 			for(int i = 1; i < gridSize/2; i++){
@@ -158,10 +181,8 @@ public class Visualizer implements Tickable{
 			g.fillRect(X*gridSize+offset, Y*gridSize+offset, gridSize, gridSize);
 		}
 	}
-	int tick;
 	@Override
 	public void tick(int clk) {
-		tick = clk;
 		screen.repaint();
 	}
 	@Override
