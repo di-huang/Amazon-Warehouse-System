@@ -49,11 +49,15 @@ public class OrderControl implements Tickable{
 	}
 	@Override
 	public void tick(int tick) {
-		Tick = tick;
+		for(Order o : pendingOrders){
+			if(o.isAllFilled()){
+				pendingOrders.remove(o);
+			}
+		}
 		if(orderQueue.isEmpty()) {
-			System.out.println("There is no order.");
 			return;
 		}
+		Tick = tick;
 		if(suspend(10,tick)){	// poll an order every 10 ticks
 			Order currO = orderQueue.poll();
 			for(ItemSlot is : currO.getItemSlots()){
