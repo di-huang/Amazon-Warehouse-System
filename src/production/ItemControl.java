@@ -12,10 +12,10 @@ import java.util.List;
 public class ItemControl implements Tickable {
 	static final HashSet<Item> stock = new HashSet<Item>();
 	ItemControl() {
-		Shelf shelf1 = Floor.SHELVES[0];
+		Shelf shelf1 = Floor.SHELVES[0];//suppose there are two shelves		
 		Shelf shelf2 = Floor.SHELVES[1];
 
-		initItems(Catalog.at(0), 10, shelf1);	// pen
+		initItems(Catalog.at(0), 10, shelf1);	// pen            		
 		initItems(Catalog.at(1), 10, shelf1);	// paper
 		initItems(Catalog.at(2), 10, shelf1);	// book
 		initItems(Catalog.at(3), 10, shelf2);	// fork
