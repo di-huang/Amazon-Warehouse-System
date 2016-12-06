@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author josephtleiferman, dihuang
+ * @author josephtleiferman
  * 
  *
  */
@@ -24,7 +24,14 @@ public class Floor {
 	public static final int gridSize = 10;
 	public static final int UPPERB = 5;
     public static final int LOWERB = 0;
-	public static LinkedList<Directions> getRoute(Point start, Point end) {
+	
+	/** 
+     * 
+     * @param start start location of a given object
+     * @param end end destination
+     * @return ArrayList returns a route from start to end of type Directions ex [LEFT,RIGHT,UP,DOWN,DOWN]
+     */ 
+    public static LinkedList<Directions> getRoute(Point start, Point end) {
 		LinkedList<Directions> route = new LinkedList<>();
         Point currentLocation = new Point(start.getX(),start.getY(),"currentLocation");
         // alternator will alternate between odd and even so that the robot will move
@@ -83,7 +90,8 @@ public class Floor {
 	/**************************************************************
 	 * following methods are not used for our simulation pattern right now
 	 */
-   public static HashMap<String,Point> FLOOR_LOCATIONS = new HashMap<>();
+   
+    public static HashMap<String,Point> FLOOR_LOCATIONS = new HashMap<>();
    // initially just statically create these objects
    public Floor() {
 	   FLOOR_LOCATIONS.put("SHELVE_1",SHELVES[0].getPos());
@@ -116,8 +124,7 @@ public class Floor {
 /**
  * 
  * @author josephtleiferman
- * Actually I think we can just generate route by using a collection of points to store each step
- * rather than using Directions. Anyway, I implement it by your way
+ *
  *
  */
 enum Directions {
