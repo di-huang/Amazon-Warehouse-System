@@ -64,6 +64,8 @@ public class Robot implements Tickable{
 					state = State.HeadingToShelf;
 					shelf = target;
 					route = Floor.getRoute(pos, target.getPos());
+				}else if(pendingOrders.isEmpty()){
+					System.out.println("There's no order right now.");
 				}
 				break;
 			case HeadingToShelf:
@@ -80,7 +82,6 @@ public class Robot implements Tickable{
 			case HeadingToPicker:
 				if(pos.equals(Floor.PICKER_WAITTING_AREA)){
 					System.out.println("Picker is pickng items...");
-					System.out.println(tick);
 					if(suspend(2,tick)){
 						end = shelf.home;
 						state = State.ReturningShelf;
@@ -108,7 +109,6 @@ public class Robot implements Tickable{
 						if(currO.isAllFilled()){
 							currO = null;
 						}
-						System.out.println(nxtinfo);
 						if(nxtinfo == null){
 							state = State.GoToCharge;
 							end = Floor.CHARGER;
