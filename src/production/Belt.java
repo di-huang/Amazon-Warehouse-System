@@ -1,117 +1,133 @@
 package production;
-//import warehouse_system.Report;
-//import warehouse_system.Tickable;
-//import warehouse_system.belt.Bin;
 
-//timing moving the bins has not been implemented yet, still waiting for 
-//integration code. 
+import java.awt.Color;
+import java.util.LinkedList;
 
-//integration with items in the orders still needed, will be involved 
-//later
+/**
+ * 
+ * @author dihuang
+ *
+ */
+public class Belt implements Tickable{
+	private static LinkedList<Bin> belt1Content = new LinkedList<Bin>();
+	private static LinkedList<Parcel> belt2Content = new LinkedList<Parcel>();
+	// place belts according to layout of Floor
+	private static Point[] belt1Points = {new Point(0,5),new Point(0,4),new Point(0,3),new Point(0,2)};
+	private static Point[] belt2Points = {new Point(0,2),new Point(0,1),new Point(0,0)};
+	final static Point belt1Start = belt1Points[0];
+	final static Point belt2Start = belt2Points[0];
+	final static Point belt1End = belt1Points[belt1Points.length-1];
+	final static Point belt2End = belt2Points[belt2Points.length-1];
+	public Belt() {
+		belt1Points[0].setNext(belt1Points[1]);
+		belt1Points[1].setNext(belt1Points[2]);
+		belt1Points[2].setNext(belt1Points[3]);
+		belt1Points[3].setNext(null);
+		belt2Points[0].setNext(belt2Points[1]);
+		belt2Points[1].setNext(belt2Points[2]);
+		belt2Points[2].setNext(null);
+	}
+	/**
+	 * @return content of belts
+	 */
+	public static LinkedList<Bin> getBelt1() {
+		return belt1Content;
+	}
+	public static LinkedList<Parcel> getBelt2() {
+		return belt2Content;
+	}
+	private static boolean moveable = true;
+	public static boolean belt1Moveable(){
+		return moveable;
+	}
+	/**
+	 * operations of picker and packer
+	 * @param order
+	 */
+	public static void doPicker(Order order){
+		belt1Content.add(new Bin(order, belt1Start));
+	}
+	private Parcel doPacker(Bin bin) {
+		return new Parcel(bin.order, belt2Start);
+	}
+	private int lasttick = -1;
+	@Override
+	public boolean suspend(int suspticks, int currtick){
+		if(currtick == lasttick + suspticks){
+			lasttick = -1;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	@Override
+	public void tick(int tick) {
+		for(Parcel pa : belt2Content){
+			Point p = pa.getPos();
+			if(p == belt2End){
+				belt2Content.remove();
+				continue;
+			}
+			pa.setPos(p.getNext());
+		}
+		for(Bin b : belt1Content){
+			Point p = b.getPos();
+			if(p == belt1End){
+				moveable = false;
+				if(lasttick == -1){
+					lasttick = tick;
+				}
+				if(suspend(1,tick)){
+					belt2Content.add(doPacker(belt1Content.remove()));
+					moveable = true;
+					continue;
+				}
+			}
+			if(moveable){
+				b.setPos(p.getNext());
+			}
+		}
+	}
+}
 
-import java.util.*;
-//Ted Herman, Nicholas Barnes
+/**
+ * 
+ * @author dihuang
+ * Parcel and Bin contain an order, which contains loaded items 
+ */
+class Parcel {
+	public final Order order;
+	private Point point;
+	public final int width = 10;
+	public Parcel(Order order, Point point){
+		this.order = order;
+		this.point = point;
+	}
+	public Point getPos() {
+		return point;
+	}
+	public void setPos(Point point) {
+		this.point = point;
+	}
+}
 
-
-public interface Belt {
-  MockFloor f = new MockFloor();
-  boolean binAvailable();  // true if Picker can get a new Bin
-  Bin getBin();  // called by Orders when Picker wants a new Bin 
-  public static MockBelt mb = new MockBelt(f);
-  //public static MockFloor mf;
-  public static Point[] pickBelt = f.PICKERBELT;//{ new Point(0,5,"PICKERBELT5"),new Point(0,4,"PICKERBELT4"),new Point(0,3,"PICKERBELT3") };
-  public static Point[] packBelt = f.PACKERBELT;//{ new Point(0,2,"PICKERBELT2"),new Point(0,1,"PICKERBELT1"),new Point(0,0,"PICKERBELT0") };
-  String pick1 = pickBelt[0].getName();
-  String pick2 = pickBelt[1].getName();
-  String pick3 = pickBelt[2].getName();
-  String pack1 = pickBelt[3].getName();
-  String pack2 = pickBelt[4].getName();
-  String pack3 = pickBelt[5].getName();
-  
-  public void tick(int count);
- // private boolean isMovable();
-  
-//   public static String getBeltItem(Point p){
-//	   return p.getName();
-//   }
-  }
-
-//public class Belt implements Tickable, Report{
-//	protected static int speed;
-//    protected static int capacity = 20;
-//    static ArrayList<Integer> beltGrid = new ArrayList<Integer>(capacity);
-//    protected static int orderNum ;
-//    
-//    
-//    public Belt(){
-//    	orderNum = (int)(Math.random() * 100.0);
-//    	speed = 2;
-//    	
-//    }
-//    
-//    //comment
-//    public int getSpeed(){
-//    	return speed;
-//    }
-//    public void setSpeed(int newSpeed){
-//    	speed = newSpeed;
-//    }
-//    public int getOrderNum(){
-//    	return orderNum;
-//     //	System.out.println("Order Number: " + orderNum);
-//    }
-//    public static void setOrderNum(int newOrder){
-//    	orderNum = newOrder;
-//    	
-//    }
-//    public static void moveRight(){
-//    	beltGrid.add(0 , 0);
-//    }
-//    public static void addBin(int orderNum){
-//    	beltGrid.add(0, orderNum);
-//    }
-//    public static boolean isPosEmpty(int index){
-//    	if (beltGrid.get(index) == 0){
-//    		System.out.println("Position " + index + " is empty");
-//    		return true;
-//    	} 
-//    	else{
-//    		System.out.println("Position " + index + " is filled");
-//    		return false;
-//    	}
-//    	
-//    }
-//	
-//   @Override
-//	public void tick(int tick) {
-//		printEvent("...");
-//		
-//	}
-//
-//	@Override
-//	public void printEvent(String event) {
-//		System.out.println("Belt: " + event);	
-//	}
-//    
-//    public static void main(String args[]){
-//    	Bin myBin = new Bin();
-//    	Belt myBelt = new Belt();
-//    	addBin(52);
-//    	moveRight();
-//    	moveRight();
-//    	addBin(122);
-//    	moveRight();
-//    	addBin(10);
-//    	
-//    	//setOrderNum(200);
-//    	System.out.println("Order Number: " + orderNum);
-//    	System.out.println("List of orders on Belt:    (0 means empty)" );
-//    	for (int x=0; x< beltGrid.size(); x++){
-//    		System.out.println("Pos. " + x + ": " + beltGrid.get(x));
-//    	}
-//    	isPosEmpty(1);   
-//    	//System.out.print("Belt: " + beltGrid.get(0));
-//    	
-//    	
-//    	
-//    }
+/**
+ * 
+ * @author dihuang
+ *
+ */
+class Bin{
+    public final Order order;
+	private Point point;
+	public final int width = 10;
+	public Bin(Order order, Point point){
+		this.order = order;
+		this.point = point;
+	}
+	public Point getPos() {
+		return point;
+	}
+	public void setPos(Point point) {
+		this.point = point;
+	}
+}

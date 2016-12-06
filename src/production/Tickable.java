@@ -1,15 +1,20 @@
 package production;
 
 /**
- * 
- * @author Di Huang
- *
+ * @author dihuang
+ * Tickable is implemented by Belt, ItemControl, OrderControl, Robot,
+ * RobotScheduler and Visualizer, which works as tunnel that transmits 
+ * central tick to other components.
  */
-public interface Tickable {
+interface Tickable {
 	/**
-	 * This interface works as a tunnel that transmits ticks 
-	 * from central clock to other components
+	 * transmit central clock
+	 * @param tick
 	 */
 	public void tick(int tick);
-	
+	/**
+	 * @param suspticks,currtick
+	 * @return true if specific ticks are already passed
+	 */
+	public boolean suspend(int suspticks, int currtick);
 }

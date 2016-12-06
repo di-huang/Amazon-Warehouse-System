@@ -1,57 +1,45 @@
 package production;
 
-import java.util.ArrayList;
-
-import production.Tickable;
-import production.Point;
 /**
  * 
- * @author Wei Gui
+ * @author dihuang, Wei Gui
  *
  */
 public class RobotScheduler implements Tickable{
+	static Robot[] robots;
 	/**
-	 * This works as the robot control subsystem
+	 * initialize robots on Charger area
 	 */
-	
-	public ArrayList<Robot> robots;//for testing only
-	
-	public RobotScheduler(int Robotnum){
-		robots = new ArrayList<Robot>();
-		for(int a=0;a<Robotnum;a++) {
-			Point temp = new Point(0,0);
-			addRobot(new MockRobot(Integer.toString(a),temp,this));
-		}
+	public RobotScheduler(){
+		robots = new Robot[1];
+		robots[0] = new Robot("0", Floor.CHARGER);
 	}
-	
-	public RobotScheduler(ArrayList<Robot> robots){
-		this.robots = robots;
-	}
-
 	@Override
 	public void tick(int tick) {
-		robots.forEach(r -> ((Tickable)r).tick(tick));
+		for(Robot r : robots)
+			r.tick(tick);
 	}
-	
-	public void addRobot(Robot r){
-		robots.add(r);
-	}
-	public Robot getAvailableRobot() {
-		for(Robot r:robots) {
-			if(((MockRobot)r).isBusy()==false) {
-				return (Robot)r;
-			}
-		}
-		//All Robots are busy now
+	/**
+	 * only used for some possible tests
+	 * @return available robot right now
+	 */
+	public static Robot getAvailableRobot() {
+		for(Robot r:robots)
+			if(r.isIdle())
+				return r;
 		return null;
 	}
-	public boolean collisioncheck(Point p) {
-		for(Robot r:robots) {
-			if(((MockRobot)r).getPOS().getX()==p.getX()&&((MockRobot)r).getPOS().getY()==p.getY()) {
-				return true;
-			}
-		}
+	@Override
+	public boolean suspend(int suspticks, int currtick) {
 		return false;
 	}
-
 }
+
+/**
+ * An enumeration of robot's state
+ * @author dihuang
+ */
+enum State{
+	IDLE, HeadingToPicker, HeadingToShelf, ReturningShelf, GoToCharge, Charging
+}
+
