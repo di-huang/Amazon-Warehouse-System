@@ -4,7 +4,7 @@ package production_unitTesting;
 import java.util.ArrayList;
 
 
-import org.junit.Assert.*;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 
