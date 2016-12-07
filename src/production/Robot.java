@@ -63,9 +63,10 @@ public class Robot implements Tickable{
 			case IDLE:
 				if(battery <= 15){	// low battery is 15
 					System.out.println(this+" has low battery("+battery+")");
-					state = State.GoToCharge;
+					state = State.GoingToCharge;
 					carrying = false;
 					end = Floor.CHARGER;
+					route = Floor.getRoute(pos, end, false);
 					break;
 				}
 				LinkedList<Order> pendingOrders = OrderControl.getPendingOrders();
@@ -76,9 +77,15 @@ public class Robot implements Tickable{
 					state = State.HeadingToShelf;
 					carrying = false;
 					end = shelf.getPos();
+					route = Floor.getRoute(pos, end, false);
 				}else if(pendingOrders.isEmpty()){				// no job now :(
 					System.out.println("There's no order right now.");
-					route = null;
+					if(!pos.equals(Floor.CHARGER)){
+						end = Floor.CHARGER;		// backing to home
+						route = Floor.getRoute(pos, end, false);
+					}else{
+						route = null;
+					}
 				}
 				break;
 			case HeadingToShelf:
@@ -143,7 +150,7 @@ public class Robot implements Tickable{
 				}
 				route = Floor.getRoute(pos, end, true);
 				break;
-			case GoToCharge:
+			case GoingToCharge:
 				if(pos.equals(end)){
 					state = State.Charging;
 					carrying = false;
@@ -171,7 +178,7 @@ public class Robot implements Tickable{
 			shelf.setPos(pos);
 		}
 		if(battery == 0){
-			System.out.println("Warning: "+this+" run out of battery!");
+			System.out.println("Warning: "+this+" runs out of battery!");
 		}else if(state != State.Charging && state != State.IDLE){
 			battery--;
 		}
