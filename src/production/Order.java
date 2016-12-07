@@ -10,11 +10,9 @@ package production;
 public class Order {
 	public final String address;
 	private ItemSlot[] itemSlots;
-	private boolean allFilled;
 	public Order(String address, ItemSlot[] itemSlots) {
 		this.address = address;
 		this.itemSlots = itemSlots;
-		allFilled = false;
 	}
 	public ItemSlot[] getItemSlots() {
 		return itemSlots;
@@ -23,13 +21,17 @@ public class Order {
 		this.itemSlots = itemSlots;
 	}
 	public boolean isAllFilled(){
-		return allFilled;
+		for(ItemSlot is : itemSlots){
+			if(is.getItem() == null){
+				return false;
+			}
+		}
+		return true;
 	}
 	public ItemInfo getUnfilledItemInfo(){
 		for(ItemSlot i : itemSlots)
 			if(i.getItem() == null)
 				return i.itemInfo;
-		allFilled = true;
 		return null;
 	}
 	public int getNeededQuantity(ItemInfo info){
