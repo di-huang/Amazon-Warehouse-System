@@ -1,17 +1,27 @@
 package production_unitTesting;
 
-import production_unitTesting.Item;
+
+import production_untitTesting.Item;
+
 
 public class Order {
 	
-    /**
-    * used _ to differentiate from previously existing Order class for now 
-    */
+	/**
+	 * @author Charles Carlson
+	 * this class is an Order object
+	 * Order object contains three fields:
+	 * 	1. Item object being ordered by customer
+	 * 	2. Integer quantity demanded
+	 * 	3. String adress to be shipped to
+	 *
+	 */
+
+
 	public Item itemBeingOrdered;
-    public String shippingAddress;
     public Integer quantity;
-   
-    
+    public String shippingAddress;
+
+
     /**
      * @author Charles Carlson
      * @param itemName
@@ -19,14 +29,27 @@ public class Order {
      * @param shippingAddress
      * @param quantity
      * @param quantity 
+     * 
+     * constructor
+     * 
+     */
+    
+    /**
+     * @author Charles Carlson
+     * @param itemBeingOrdered
+     * @param quantity
+     * @param shippingAddress
+     * 
      */
     public Order(Item itemBeingOrdered, Integer quantity, String shippingAddress ) {
+
 
         /*this.serial = serial;
         this.itemName = itemName;*/
     	this.itemBeingOrdered= itemBeingOrdered;
         this.quantity = quantity;
         this.shippingAddress = shippingAddress;
+
 
     }
     
@@ -35,17 +58,11 @@ public class Order {
      * 
      * following methods are straightforward getters and setters
      * there are also getters for the fields of the Item of the Order
-     * Alot of these don't get used by are there just incase
+     * a lot of these don't get used by are there just in case
      * 
      */
-    
-    /**
-     * @author Charles Carlson
-     * @return
-     * 
-     * returns String name of Item
-     */
-    
+
+
     public Item getItemBeingOrdered() {
     	return this.itemBeingOrdered;
     }
@@ -58,14 +75,30 @@ public class Order {
     	return this.itemBeingOrdered.toString();
     }
     
+    
+    /**
+     * @author Charles Carlson
+     * @return null or !=null
+     * 
+     * used in OrderControl, the point of this one is to see if an Item in the inventory. 
+     * if it has a shelfID, then it is in the inventory
+     * if its shelfID == null, then it is not in the inventory
+     * however, locating shelves for robots will not be done using this method
+     */
     public String getItemBeingOrderedShelfID() {
-    	if(this.itemBeingOrdered.shelfID!=null) { return this.itemBeingOrdered.shelfID; }
-    	else { return null; }
+    	if(this.itemBeingOrdered.shelfID!=null) { 
+    		return this.itemBeingOrdered.shelfID; 
+    	}
+    	
+    	else { 
+    		return null; 
+    	}
     }
     
     public String getShippingAddress() {
         return shippingAddress;
     }
+
 
     public Integer getQuantity() {
         return quantity;
@@ -75,8 +108,20 @@ public class Order {
         this.shippingAddress = shippingAddressSetter;
     }
 
+
     public void setQuantity (int quantitySetter) {
         this.quantity = quantitySetter;
+    }
+    
+    /**
+     * 
+     * @author Charles Carlson
+     * toString used by TestOrders 
+     */
+    @Override
+    public String toString() {
+     	
+    	return this.getItemBeingOrderedName().toString(); 
     }
     
   }
