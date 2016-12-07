@@ -24,6 +24,42 @@ public class Floor {
 	public static final int UPPERB = 5;
     public static final int LOWERB = 0;
     
+    /**
+     * @author dihuang
+     * Dynamic generating route, so we have to call this method each tick.
+     * Robot calls this method currently.
+     * @param start, end, entity
+     * @return route
+     */
+    public static LinkedList<Directions> getRoute(Point start, Point end, boolean entity) {
+		LinkedList<Directions> route = new LinkedList<>();
+        Point currP = start;	// current point
+        Point nxtP = null;		// next point
+        Directions[] directions = {Directions.UP, Directions.DOWN, Directions.LEFT, Directions.RIGHT};
+        Directions opD = null;	//optimal direction
+        while(!currP.equals(end)){
+        	outter:for(Directions d : directions){
+        		nxtP = currP.nextpoint(d);
+        		if(entity){
+        			for(Shelf s : SHELVES){
+            			if(nxtP.equals(s.getPos()) || nxtP.out()){
+            				continue outter;
+            			}
+            		}
+        		}
+        		if(currP.closeTo(d, end)){
+        			opD = d;
+        			break;
+        		}
+        		opD = d;
+        	}
+        	
+        	route.add(opD);
+        	currP = nxtP;
+        }
+        return route;
+	}
+    
     /** 
      * Should only be used to get a route to a shelf
      * Use getRouteWithShelf() once it has picked up the shelf to prevent shelves from colliding
@@ -207,7 +243,6 @@ public class Floor {
         }
         return route;
 	}
-    
 	/**************************************************************
 	 * following methods are not used for our simulation pattern right now
 	 */
