@@ -124,14 +124,14 @@ public class Visualizer implements Tickable{
 			int yCharger = Floor.CHARGER.getY();
 			g.fillRect(xCharger*gridSize+offset, yCharger*gridSize+offset, gridSize, gridSize);
 			
-			// Robot
-			Robot r = RobotScheduler.robots[0];
-			paintRobot(r.getPOS(), g);
-			
 			// Shelf
 			for(Shelf s : Floor.SHELVES){
 				paintShelf(s.getPos(),g);
 			}
+			
+			// Robot
+			Robot r = RobotScheduler.robots[0];
+			paintRobot(r, g);
 			
 			// Bin
 			for(Bin b : Belt.getBelt1()){
@@ -155,8 +155,13 @@ public class Visualizer implements Tickable{
 				g.drawLine(X, yt, X+gridSize, yt);
 			}
 		}
-		void paintRobot(Point pos, Graphics g){
-			g.setColor(Color.BLUE);
+		void paintRobot(Robot r, Graphics g){
+			Point pos = r.getPOS();
+			if(r.carrying()){
+				g.setColor(Color.BLACK);
+			}else{
+				g.setColor(Color.BLUE);
+			}
 			int xRobot = pos.getX();
 			int yRobot = pos.getY();
 			g.fillRect(xRobot*gridSize+offset+2, yRobot*gridSize+offset+2, gridSize-4, gridSize-4);
