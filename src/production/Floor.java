@@ -156,12 +156,15 @@ public class Floor {
                 int diff1 = Math.abs(currentLocation.getY()+1 - end.getY());
                 int diff2 = Math.abs(currentLocation.getY()-1 - end.getY());
                 Point tempLocation = new Point(currentLocation.getX(),currentLocation.getY(),"tempLocation");
+                boolean shelfFlag = false;
                 if(diff1<diff2) {
                 	tempLocation.setPoint(tempLocation.getX(), tempLocation.getY()+1);
+                	System.out.println("tempLocation: " + tempLocation.getX()+  " ," + tempLocation.getY());
                 	// used to find if shelf is next location
-                    boolean shelfFlag = false;
+                    shelfFlag = false;
                     for(Shelf p: SHELVES) {
                     	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    		System.out.println("shelfLocation: " + p.getPos().getX()+  " ," + p.getPos().getY());
                     		shelfFlag = true;
                     	}
                     }
@@ -178,10 +181,12 @@ public class Floor {
                 }
                 else {
                 	tempLocation.setPoint(tempLocation.getX(), tempLocation.getY()-1);
+                	System.out.println("tempLocation: " + tempLocation.getX()+  " ," + tempLocation.getY());
                 	// used to find if shelf is next location
-                    boolean shelfFlag = false;
+                    shelfFlag = false;
                     for(Shelf p: SHELVES) {
-                    	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    	if((p.getPos().getX() == tempLocation.getX()) && (p.getPos().getY() == tempLocation.getY())) {
+                    		System.out.println("shelfLocation: " + p.getPos().getX()+  " ," + p.getPos().getY());
                     		shelfFlag = true;
                     	}
                     }
