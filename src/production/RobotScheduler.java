@@ -40,6 +40,6 @@ public class RobotScheduler implements Tickable{
  * @author dihuang
  */
 enum State{
-	IDLE, HeadingToPicker, HeadingToShelf, ReturningShelf, GoToCharge, Charging
+	IDLE, HeadingToPicker, HeadingToShelf, ReturningShelf, GoingToCharge, Charging
 }
 
