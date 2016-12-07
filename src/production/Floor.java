@@ -48,7 +48,7 @@ public class Floor {
                 Point tempLocation = new Point(currentLocation.getX(),currentLocation.getY(),"tempLocation");
                 if(diff1<diff2) {
                     tempLocation.setPoint(tempLocation.getX()+1, tempLocation.getY()); 
-                    if(tempLocation.getX()<UPPERB) {
+                    if(tempLocation.getX()<UPPERB-1) {
                         currentLocation.setPoint(currentLocation.getX()+1,currentLocation.getY());
                         route.add(Directions.RIGHT);
                     }
