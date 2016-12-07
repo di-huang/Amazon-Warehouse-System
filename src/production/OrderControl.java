@@ -11,11 +11,10 @@ public class OrderControl implements Tickable{
 	private static final LinkedList<Order> orderQueue = new LinkedList<Order>();
 	public OrderControl(){
 		// schedule orders for testing
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(0)), new ItemSlot(Catalog.at(3))}));	// pen, fork
+		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(3)),new ItemSlot(Catalog.at(0))}));	// fork, pen
 		orderQueue.add(new Order("b st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
-		orderQueue.add(new Order("c st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0))}));	// paper, pen
-		orderQueue.add(new Order("d st", new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	// book
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(5))})); // plate
+		orderQueue.add(new Order("c st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0)),new ItemSlot(Catalog.at(5))}));// paper, pen, plate
+		orderQueue.add(new Order("d st", new ItemSlot[]{new ItemSlot(Catalog.at(2)),new ItemSlot(Catalog.at(2))}));	// book(2)
 		// ...
 	}
 	/**
