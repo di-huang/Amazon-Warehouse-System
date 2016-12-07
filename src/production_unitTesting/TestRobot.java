@@ -6,7 +6,7 @@ package production_unitTesting;
  */
 public class TestRobot {
 
-	public void TestingRobot() throws InterruptedException {
+	public static void TestingRobot() throws InterruptedException {
 
 		RobotScheduler rs=new RobotScheduler(0);
 		//The MockRobot is designed to hold only 2-robots test in the charging pattern
@@ -27,6 +27,10 @@ public class TestRobot {
 			}
 		}
 		System.out.println("Test Ended");
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		TestingRobot();
 	}
 
 }
