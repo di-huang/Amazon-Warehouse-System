@@ -2,12 +2,12 @@
 package production_unitTesting;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-
+import production.Floor;
 
 
 /**
@@ -17,6 +17,8 @@ import org.junit.Test;
 public class FloorTest {
 	MockFloor f = new MockFloor();
 	Point p = new Point(2,5,"p");
+	
+	
 	
 	@Test
 	public void test() {
