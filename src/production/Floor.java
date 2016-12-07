@@ -47,18 +47,43 @@ public class Floor {
                 int diff2 = Math.abs(currentLocation.getX()-1 - end.getX());
                 Point tempLocation = new Point(currentLocation.getX(),currentLocation.getY(),"tempLocation");
                 if(diff1<diff2) {
-                    tempLocation.setPoint(tempLocation.getX()+1, tempLocation.getY()); 
-                    if(tempLocation.getX()<UPPERB) {
+                    tempLocation.setPoint(tempLocation.getX()+1, tempLocation.getY());
+                    // used to find if shelf is next location
+                    boolean shelfFlag = false;
+                    for(Shelf p: SHELVES) {
+                    	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    		shelfFlag = true;
+                    	}
+                    }
+                    if(tempLocation.getX()<UPPERB && shelfFlag == false) {
                         currentLocation.setPoint(currentLocation.getX()+1,currentLocation.getY());
                         route.add(Directions.RIGHT);
+                    } else {
+                    	// shelf in the way just go opposite direction to resolve
+                    	if( tempLocation.getX()>LOWERB ) {
+                        	currentLocation.setPoint(currentLocation.getX()-1,currentLocation.getY());
+                            route.add(Directions.LEFT);
+                        }     	
                     }
                 }
                 else {
                 	tempLocation.setPoint(tempLocation.getX()-1, tempLocation.getY());
-                    
-                    if( tempLocation.getX()>LOWERB ) {
+                	boolean shelfFlag = false;
+                    for(Shelf p: SHELVES) {
+                    	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    		shelfFlag = true;
+                    	}
+                    }
+                    if( tempLocation.getX()>LOWERB && shelfFlag == false) {
                     	currentLocation.setPoint(currentLocation.getX()-1,currentLocation.getY());
                         route.add(Directions.LEFT);
+                    } else {
+                    	// shelf in the way just go opposite direction make sure your not leaving area
+                    	if(tempLocation.getX()<UPPERB) {
+                            currentLocation.setPoint(currentLocation.getX()+1,currentLocation.getY());
+                            route.add(Directions.RIGHT);
+                        }
+                    	
                     }
                 }
             }else if(alternator%2==1 && currentLocation.getY() != end.getY()) {
@@ -69,17 +94,42 @@ public class Floor {
                 Point tempLocation = new Point(currentLocation.getX(),currentLocation.getY(),"tempLocation");
                 if(diff1<diff2) {
                 	tempLocation.setPoint(tempLocation.getX(), tempLocation.getY()+1);
-                    
-                    if( tempLocation.getY()>LOWERB) {
+                	// used to find if shelf is next location
+                    boolean shelfFlag = false;
+                    for(Shelf p: SHELVES) {
+                    	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    		shelfFlag = true;
+                    	}
+                    }
+                    if( tempLocation.getY()>LOWERB && shelfFlag == false) {
                     	currentLocation.setPoint(currentLocation.getX(),currentLocation.getY()+1);
                         route.add(Directions.DOWN);
+                    } else {
+                    	//shelf in the way go opposite direction to resolve
+                    	if( tempLocation.getY()<UPPERB) {
+                        	currentLocation.setPoint(currentLocation.getX(),currentLocation.getY()-1);
+                            route.add(Directions.UP);
+                        }
                     }
                 }
                 else {
                 	tempLocation.setPoint(tempLocation.getX(), tempLocation.getY()-1);
-                    if( tempLocation.getY()<UPPERB) {
+                	// used to find if shelf is next location
+                    boolean shelfFlag = false;
+                    for(Shelf p: SHELVES) {
+                    	if(p.getPos().getX() == tempLocation.getX() && p.getPos().getY() == tempLocation.getY()) {
+                    		shelfFlag = true;
+                    	}
+                    }
+                    if( tempLocation.getY()<UPPERB && shelfFlag == false) {
                     	currentLocation.setPoint(currentLocation.getX(),currentLocation.getY()-1);
                         route.add(Directions.UP);
+                    }else {
+                    	//shelf in the way go opposite direction to resolve
+                    	if( tempLocation.getY()>LOWERB) {
+                        	currentLocation.setPoint(currentLocation.getX(),currentLocation.getY()+1);
+                            route.add(Directions.DOWN);
+                        }
                     }
                 }
             }
