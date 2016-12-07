@@ -1,147 +1,155 @@
-package production_unitTesting;
 
-//coppekfnpkj
+package production;
+
+
+
+
 import java.util.*;
-
-import production_unitTesting.*;
 
 
 public class OrderControl implements Tickable {
 	
 	/**
+	 * @author Charles Carlson
 	 * 
 	 * Orders are held in a queue
-	 * mock Orders are kept in orderQueueTesting and are popped off and
-	 * pushed onto the orderQueue with each tick
-	 * 
+	 * Orders are kept in Pending Orders and are popped off and
+	 * pushed onto the Order Queue with each tick 
 	 */
-	ArrayList<Order> orderQueueTesting = new ArrayList<Order>();
+	ArrayList<Order> pendingOrders = new ArrayList<Order>();
 	private LinkedList<Order> orderQueue;
-	private ItemController I;
-	private RobotScheduler R;
-	private MockBelt B;
 	private Order currentOrder;
 	
 	/**
 	 * 
-	 * mock Orders
-	 * these 9 mock Items all exist in the inventory, so there will never be a case where the Item field 
-	 * of an Order cannot be filled, just for now 
-	 * 
-	 */
-	Item RED_SHIRT = new Item("RED_SHIRT", 200, "1");
-	Item BLUE_SHIRT = new Item("BLUE_SHIRT", 300, "1");
-	Item BICYCLE = new Item("BICYCLE", 2, "2");
-	Item BASKETBALL = new Item("BASKETBALL", 50, "2");
-	Item SHAVING_CREAM= new Item("SHAVING_CREAM", 10, "3");
-	Item DUCT_TAPE = new Item("DUCT_TAPE", 1, "3");
-	Item BOOK = new Item("BOOK", 20, "4");
-	Item EGG_PLANT = new Item("EGG_PLANT", 2000, "5");
-	Item FLUTE = new Item("FLUTE", 5, "6");
-	
-	
-	Order order1 = new Order(RED_SHIRT, 2, "501 South Dodge Street");
-	Order order2 = new Order(BLUE_SHIRT, 5, "313 South Gilbert Street");
-	Order order3 = new Order(BICYCLE, 1, "613 East Court Street");
-	Order order4 = new Order(BASKETBALL, 2, "512 North Dodge Street");
-	Order order5 = new Order(SHAVING_CREAM, 4, "902 Davenport Street");
-	Order order6 = new Order(DUCT_TAPE, 1, "451 East Market Street");
-	Order order7 = new Order(BOOK, 1, "222 Governor Street");
-	Order order8 = new Order(EGG_PLANT, 1, "378 Lucas Street");
-	Order order9 = new Order(FLUTE, 1, "987 Clinton Ave");
-	
-	/**
-	 * 
 	 * @author Charles Carlson
-	 * ItemController to check inventory
-	 * RobotScheduler to do work after checking inventory
-	 * 
-	 * @param itemController
-	 * @param robotScheduler
-	 * probably Belt soon
-	 * 
+	 * constructor initiates the Order Queue
 	 */
-	public OrderControl(ItemController I, RobotScheduler R, MockBelt B) {
-		this.I = I;
-		this.R = R;
-		this.B = B;
-		
+	public OrderControl() {
 		orderQueue = new LinkedList<>();
-		}
+	}
 	
 	/**
 	 * @author Charles Carlson
-	 * 1. 	Check if queue of orders is empty
-	 * 		if so:
-	 * 			pop an order from orderQueueTesting and add it to orderQueue
-	 * 2.	Check if the current order being processed is NULL
-	 * 		if so:
-	 * 			current order becomes first Order popped off of order queue
-	 * 			Print statement 
-	 * 3.	Check if robot is available:
-	 * 		if not:	
-	 * 			tick
-	 * 		if so:
-	 * 			give robot shelfID and request robot to fetch
-	 * 4.	tick
-	 * 			
+	 * @return int length of Pending Orders Queue
+	 * used for testing only
+	 */
+	public int getLengthPendingOrders() {
+		return pendingOrders.size();
+	}
+	
+	/**
+	 * @author Charles Carlson
+	 * @return ArrayList<Order> that is the Pending Orders
+	 * used for testing only
+	 */
+	public ArrayList<Order> getPendingOrders() {
+		return pendingOrders;
+	}
+
+
+	/**
+	 * @author Charles Carlson
 	 * 
+	 * add an Order to the Pending Orders
+	 * the Order will be held here until ticking begins
+	 */
+	public void addOrder(Order o) {
+		pendingOrders.add(o);
+	}
+	
+	/**
+	 * @author Charles Carlson
+	 * 
+	 * 1. 	Orders that are being held in the Pending Orders Queue are popped and pushed onto the Order Queue
+	 * 2.	Information about that Order is printed to the console
+	 * 3.	Order Control will check to see if the inventory can support the Item and quantity requested
+	 * 4.	If the Order cannot be fulfilled there will be a message in the console and the clock will continue to tick
+	 * 5. 	If the Order can be fulfilled it there will be a message in the console and the clock will continue to tick
+	 * 6.	The next Order begins 
+	 * 7. 	when there are no more Orders in the Order Queue or Pending Orders,
+	 * 		the clock will continue to tick and Pending Orders will await any new Orders	
+	 */
+
+
+	/**
+	 * 
+	 * @author Charles Carlson
+	 * 
+	 * A NOTE ON TICK COSTS:
+	 * 
+	 * certain actions take a tick to complete. Here is a table:
+	 * Order from Pending Orders to Order Queue 															1 Tick
+	 * if Order Control denies clearance because of quantity or existence of Item							1 Tick
+	 * clearing an Order																					1 Tick
+	 * 
+	 * an Order will take 2 ticks, regardless of whether it's cleared or not, to pass through the Order Control
 	 */
 	public void tick(int tick) {
+		int lastPendingOrder = -1;
 		
-		orderQueueTesting.add(order1);
-		orderQueueTesting.add(order2);
-		orderQueueTesting.add(order3);
-		orderQueueTesting.add(order4);
-		orderQueueTesting.add(order5);
-		orderQueueTesting.add(order6);
-		orderQueueTesting.add(order7);
-		orderQueueTesting.add(order8);
-		orderQueueTesting.add(order9);
-
-
-		if (orderQueue.size() < 1) {
-			orderQueue.push(orderQueueTesting.get(0));
-			orderQueueTesting.remove(orderQueueTesting.get(0));
-			return; //if orderQueue empty, add from orderQueueTesting
+		//tick until new Order comes in
+		if(pendingOrders.size() == 0) {
+			return;
 		}
 		
+		if (orderQueue.size() < 1) {
+			orderQueue.push(pendingOrders.get(0));
+			System.out.println("************** Tick " + tick + "*************************");
+			System.out.println("Order: " + pendingOrders.get(0).toString() + " has been pushed onto orderQueue from pendingOrders");
+			pendingOrders.remove(pendingOrders.get(0));
+			if(pendingOrders.size() != 0) {
+				return; //if orderQueue empty, add from orderQueueTesting
+			}
+			if(pendingOrders.size() == 0) {
+				lastPendingOrder = 1;
+			}
+		}
+		
+		//Current Order becomes first Order in the Order Queue
 		if(currentOrder == null) {
 			currentOrder = orderQueue.pop();
-			System.out.println("OrderControll starts a new Order");
-			//set currentOrder to first Order in OrderQueue
+			System.out.println("OrderControll starts a new Order:  " 
+					+ "|| Item: " + currentOrder + 
+					", Quantity: " + currentOrder.getQuantity() + 
+					", Shipping Address: " + currentOrder.getShippingAddress() + " ||");
 		}
 		
-		if(R.getAvailableRobot() == null) {
-			return; //wait until later tick
-		}
-	
+		//check if the inventory can support the Order
 		String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
-		//String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
-		if(currentOrderShelf == null) { 
-			System.out.println("Item not in inventory");
-			return; //tick
+		if(currentOrderShelf == null) {
+			System.out.println("[Current Order " + currentOrder + " cannot be CLEARED at this time");
+			System.out.println("Reason: Item not found in Inventory");
+			currentOrder = null;
+			return; //tick because this Order cannot be completed
 		}
+
+
 		
-		/**
-		 * 
-		 * method doesn't exist yet
-		 * commented out for the sake of errors
-		 * 
-		 */
-		/*R.requestShelf(currentOrderShelf,(Picker)this);
-		return;//tick*/
+		//the inventory can support the Order
+		System.out.println("Item found in Inventory");
 		
-		/**
-		 * 
-		 * create a new bin, put the Order in the bin, mark the order as finished
-		 * for now, probably won't keep
-		 * 
-		 */
-		if(B.binAvailable()) {
-			B.getBin();
+
+
+		//errors unavoidable
+		/*if(!ItemController.itemAvailable(currentOrder.getItemBeingOrdered())) {
+			System.out.println("The Inventory CANNOT support an Order of that quantity");
+			currentOrder = null;
+			return;
+		}*/
+		
+		
+		//success.... the inventory can support the Order
+		System.out.println("The Inventory CAN support that Order quantity");
+		System.out.println( "[Current Order " + currentOrder +  " has been CLEARED]");
+		if(lastPendingOrder!=1) {
+			System.out.println("Beginning Next Order...");
+			System.out.println("\n");
 		}
-		
-		
+		currentOrder = null; //Current Order has been cleared and we can look at the next Order, if one exists
+		if(lastPendingOrder==1) { 
+			System.out.println("\n");
+			System.out.println("There are no more Pending Orders at this time. Continue ticking...");
+		}
 	}
 }
