@@ -14,13 +14,20 @@ public class ItemControl implements Tickable {
 	ItemControl() {
 		Shelf shelf1 = Floor.SHELVES[0];//suppose there are two shelves		
 		Shelf shelf2 = Floor.SHELVES[1];
+		Shelf shelf3 = Floor.SHELVES[2];
+		Shelf shelf4 = Floor.SHELVES[3];
+		Shelf shelf5 = Floor.SHELVES[4];
 
-		initItems(Catalog.at(0), 10, shelf1);	// pen            		
-		initItems(Catalog.at(1), 10, shelf1);	// paper
-		initItems(Catalog.at(2), 10, shelf1);	// book
-		initItems(Catalog.at(3), 10, shelf2);	// fork
-		initItems(Catalog.at(4), 10, shelf2);	// spoon
-		initItems(Catalog.at(5), 10, shelf2);	// plate
+		initItems(Catalog.at(0), 100, shelf1);	// pen            		
+		initItems(Catalog.at(1), 100, shelf1);	// paper
+		initItems(Catalog.at(2), 100, shelf1);	// book
+		initItems(Catalog.at(3), 100, shelf2);	// fork
+		initItems(Catalog.at(4), 100, shelf2);	// spoon
+		initItems(Catalog.at(5), 100, shelf2);	// plate
+		// more...
+		initItems(Catalog.at(6), 20, shelf3);	// tank
+		initItems(Catalog.at(7), 20, shelf4);	// fighter
+		initItems(Catalog.at(8), 20, shelf5);	// submarine
 	}
 	private void initItems(ItemInfo info, int quantity, Shelf shelf) {
 		for (int i = 0; i < quantity; i++) {
@@ -82,7 +89,7 @@ public class ItemControl implements Tickable {
 		// shelf
 		Item magic = new Item(info); // just what we need
 		// search for a shelf which isn't being transported
-		magic.setHolder(Floor.SHELVES[0]);	// for temp solution
+		magic.setHolder(Floor.SHELVES[Floor.SHELVES.length-1]);	// for temp solution
 		return null;
 	}
 	/**

@@ -11,7 +11,12 @@ import java.util.LinkedList;
 public class Floor {
 	public static Point SHELVE_1 = new Point(2,2,"SHELVE_1");
     public static Point SHELVE_2 = new Point(3,2,"SHELVE_2");
-    public static Shelf[] SHELVES = {new Shelf(SHELVE_1), new Shelf(SHELVE_2)}; // initialize shelves
+    public static Point SHELVE_3 = new Point(5,1,"SHELVE_3");
+    public static Point SHELVE_4 = new Point(5,2,"SHELVE_4");
+    public static Point SHELVE_5 = new Point(5,3,"SHELVE_5");
+    public static Point SHELVE_X = new Point(5,4,"SHELVE_X");		// reserved for magical replenishment
+    public static Shelf[] SHELVES = {new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
+    		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)}; // initialize shelves
     public static final Point CHARGER = new Point(2,0,"CHARGER");
     public static final Point RECEIVING_DOCK = new Point(5,0,"RECEIVING_DOCK");
     public static final Point PICKER = new Point(1,5,"PICKER");
@@ -243,7 +248,7 @@ public class Floor {
         }
         return route;
 	}
-	/**************************************************************
+	/**********************************************************************
 	 * following methods are not used for our simulation pattern right now
 	 */
    

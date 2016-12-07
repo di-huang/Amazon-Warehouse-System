@@ -15,6 +15,26 @@ public class OrderControl implements Tickable{
 		orderQueue.add(new Order("b st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
 		orderQueue.add(new Order("c st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0)),new ItemSlot(Catalog.at(5))}));// paper, pen, plate
 		orderQueue.add(new Order("d st", new ItemSlot[]{new ItemSlot(Catalog.at(2)),new ItemSlot(Catalog.at(2))}));	// book(2)
+		// more...
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("f st", new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(7)), new ItemSlot(Catalog.at(6))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3)), new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(5))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
+		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
 		// ...
 	}
 	/**

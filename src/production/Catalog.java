@@ -13,6 +13,9 @@ public class Catalog{
 			new ItemInfo(1003, "fork"), 	// 3
 			new ItemInfo(1004, "spoon"),	// 4
 			new ItemInfo(1005, "plate"),	// 5
+			new ItemInfo(1006, "tank"),		// 6
+			new ItemInfo(1007, "fighter"),	// 7
+			new ItemInfo(1008, "submarine"),// 8
 			//...
 	};
 	/**

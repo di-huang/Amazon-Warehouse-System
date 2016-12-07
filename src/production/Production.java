@@ -14,7 +14,7 @@ public class Production {
 		OrderControl O = new OrderControl();
 		Visualizer V = new Visualizer();
 		Master M = new Master(B, F, I, O, R, V);
-		M.setLimit(110);
-		M.setUnitTime(500);
+		M.setLimit(600);
+		M.setUnitTime(200);
 	}
 }
