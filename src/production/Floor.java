@@ -28,7 +28,7 @@ public class Floor {
      * @author dihuang
      * Generating dynamic route(improve applicability and expandability), so we have to call this method each tick. 
      * Robot calls this method currently.
-     * @param @param robot, start point, end point
+     * @param robot, start point, end point
      * @return dynamic route
      */
     public static LinkedList<Directions> getRoute(Robot robot, Point start, Point end) {
