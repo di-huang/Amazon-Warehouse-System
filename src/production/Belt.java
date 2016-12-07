@@ -39,23 +39,43 @@ public class Belt implements Tickable{
 	public static LinkedList<Parcel> getBelt2() {
 		return belt2Content;
 	}
-	private static boolean moveable = true;
-	public static boolean belt1Moveable(){
-		return moveable;
-	}
 	/**
 	 * operations of picker and packer
 	 * @param order
 	 */
-	public static void doPicker(Order order){
-		belt1Content.add(new Bin(order, belt1Start));
+	static Bin currB = null;
+	public static void doPicker(Order order, Shelf shelf){
+		Item[] itemsOnShelf = ItemControl.onShelf(shelf);
+		for(ItemSlot is : order.getItemSlots()){
+			for(Item i : itemsOnShelf){
+				if(i.match(is)){
+					System.out.println("Picker put " + i + "in the bin.");
+					is.setItem(i);
+					ItemControl.removeItem(i, shelf);
+					break;
+				}
+			}
+		}
+		if(order.isAllFilled()){
+			currB.enable();
+		}
 	}
-	private Parcel doPacker(Bin bin) {
-		return new Parcel(bin.order, belt2Start);
+	public static void generateBin(Order order){
+		if(currB == null){
+			currB = new Bin(order, belt1Start);
+			belt1Content.add(currB);
+		}
 	}
+	private Parcel doPacker(Bin b) {
+		return new Parcel(b.order, belt2Start);
+	}
+	static int Tick = 0;
 	private int lasttick = -1;
 	@Override
 	public boolean suspend(int suspticks, int currtick){
+		if(lasttick == -1){
+			lasttick = Tick;
+		}
 		if(currtick == lasttick + suspticks){
 			lasttick = -1;
 			return true;
@@ -65,6 +85,7 @@ public class Belt implements Tickable{
 	}
 	@Override
 	public void tick(int tick) {
+		Tick = tick;
 		for(Parcel pa : belt2Content){
 			Point p = pa.getPos();
 			if(p == belt2End){
@@ -76,17 +97,12 @@ public class Belt implements Tickable{
 		for(Bin b : belt1Content){
 			Point p = b.getPos();
 			if(p == belt1End){
-				moveable = false;
-				if(lasttick == -1){
-					lasttick = tick;
-				}
 				if(suspend(1,tick)){
 					belt2Content.add(doPacker(belt1Content.remove()));
-					moveable = true;
+					currB = null;		// reset current bin
 					continue;
 				}
-			}
-			if(moveable){
+			}else if(b.isMoveable()){
 				b.setPos(p.getNext());
 			}
 		}
@@ -102,8 +118,9 @@ class Parcel {
 	public final Order order;
 	private Point point;
 	public final int width = 10;
-	public Parcel(Order order, Point point){
-		this.order = order;
+	public final Color color = Color.GRAY;
+	public Parcel(Order o, Point point){
+		order = o;
 		this.point = point;
 	}
 	public Point getPos() {
@@ -120,12 +137,21 @@ class Parcel {
  *
  */
 class Bin{
-    public final Order order;
+	public final Order order;
 	private Point point;
+	private boolean moveable;
 	public final int width = 10;
-	public Bin(Order order, Point point){
-		this.order = order;
-		this.point = point;
+	public final Color color = Color.ORANGE;
+	public Bin(Order o, Point p){
+		order = o;
+		this.point = p;
+		moveable = false;
+	}
+	public boolean isMoveable(){
+		return moveable;
+	}
+	public void enable(){
+		moveable = true;
 	}
 	public Point getPos() {
 		return point;
