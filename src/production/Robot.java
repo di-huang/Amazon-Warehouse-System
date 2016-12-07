@@ -66,7 +66,7 @@ public class Robot implements Tickable{
 					state = State.GoingToCharge;
 					carrying = false;
 					end = Floor.CHARGER;
-					route = Floor.getRoute(pos, end, false);
+					route = Floor.getRoute(this, pos, end);
 					break;
 				}
 				LinkedList<Order> pendingOrders = OrderControl.getPendingOrders();
@@ -77,19 +77,18 @@ public class Robot implements Tickable{
 					state = State.HeadingToShelf;
 					carrying = false;
 					end = shelf.getPos();
-					route = Floor.getRoute(pos, end, false);
+					route = Floor.getRoute(this, pos, end);
 				}else if(pendingOrders.isEmpty()){				// no job now :(
 					System.out.println("There's no order right now.");
 					if(!pos.equals(Floor.CHARGER)){
 						end = Floor.CHARGER;		// backing to home
-						route = Floor.getRoute(pos, end, false);
+						route = Floor.getRoute(this, pos, end);
 					}else{
 						route = null;
 					}
 				}
 				break;
 			case HeadingToShelf:
-				if(carrying)carrying = false;
 				if(pos.equals(end)){
 					System.out.println(this+" is picking up the shelf...");
 					shelf.pickup();
@@ -98,10 +97,9 @@ public class Robot implements Tickable{
 					end = Floor.PICKER_WAITTING_AREA;
 					break;
 				}
-				route = Floor.getRoute(pos, end, false);
+				route = Floor.getRoute(this, pos, end);
 				break;
 			case HeadingToPicker:
-				if(!carrying)carrying = true;
 				if(pos.equals(Floor.PICKER_WAITTING_AREA)){
 					System.out.println("Picker is pickng items...");
 					if(suspend(1,tick)){
@@ -123,10 +121,9 @@ public class Robot implements Tickable{
 					}
 					break;
 				}
-				route = Floor.getRoute(pos, end, true);
+				route = Floor.getRoute(this, pos, end);
 				break;
 			case ReturningShelf:
-				if(!carrying)carrying = true;
 				if(pos.equals(end)){
 					System.out.println(this+" is putting down the shelf...");
 					shelf.putdown();
@@ -148,7 +145,7 @@ public class Robot implements Tickable{
 					}
 					break;
 				}
-				route = Floor.getRoute(pos, end, true);
+				route = Floor.getRoute(this, pos, end);
 				break;
 			case GoingToCharge:
 				if(pos.equals(end)){
@@ -156,10 +153,9 @@ public class Robot implements Tickable{
 					carrying = false;
 					break;
 				}
-				route = Floor.getRoute(pos, end, false);
+				route = Floor.getRoute(this, pos, end);
 				break;
 			case Charging:
-				if(carrying)carrying = false;
 				System.out.println(this+" is charging itself.");
 				if(battery < 40){
 					battery += 10;

@@ -31,7 +31,7 @@ public class Floor {
      * @param start, end, entity
      * @return route
      */
-    public static LinkedList<Directions> getRoute(Point start, Point end, boolean entity) {
+    public static LinkedList<Directions> getRoute(Robot robot, Point start, Point end) {
 		LinkedList<Directions> route = new LinkedList<>();
         Point currP = start;	// current point
         Point nxtP = null;		// next point
@@ -40,7 +40,7 @@ public class Floor {
         while(!currP.equals(end)){
         	outter:for(Directions d : directions){
         		nxtP = currP.nextpoint(d);
-        		if(entity){
+        		if(robot.carrying){
         			for(Shelf s : SHELVES){
             			if(nxtP.equals(s.getPos()) || nxtP.out()){
             				continue outter;
