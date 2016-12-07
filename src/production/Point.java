@@ -4,7 +4,7 @@ package production;
  * @author josephtleiferman, dihuang
  * member variables of Point: (x,y), next_point, name?
  */
-class Point {
+public class Point {
 	private int x, y;
 	private String name; // not used for our simulation pattern 
 	private Point next;

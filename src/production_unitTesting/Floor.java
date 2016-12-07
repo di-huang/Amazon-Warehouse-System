@@ -2,7 +2,6 @@ package production_unitTesting;
 
 import java.util.ArrayList;
 
-import production_unitTesting.MockFloor.Directions;
 /**
  * 
  * @author josephtleiferman
@@ -23,7 +22,7 @@ public interface Floor {
      * @param end end destination
      * @return ArrayList returns a route from start to end of type Directions ex [LEFT,RIGHT,UP,DOWN,DOWN]
      */ 
-	public static ArrayList<MockFloor.Directions> getRoute(Point start, Point end) {
+	public static ArrayList<Directions> getRoute(Point start, Point end) {
 		ArrayList<Directions> route = new ArrayList<>();
         Point currentLocation = new Point(start.getX(),start.getY(),"currentLocation");
         // alternator will alternate between odd and even so that the robot will move
@@ -81,5 +80,8 @@ public interface Floor {
         
 	}
 	public void placeRobot(Point l);
+}
+enum Directions {
+    UP,DOWN,LEFT,RIGHT
 }
 
