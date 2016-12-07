@@ -1,15 +1,16 @@
-package production;
+package production_unitTesting;
 
 import java.util.LinkedList;
 
 import org.junit.Test;
 
-import production_unitTesting.MockFloor;
-import production_unitTesting.Point;
+import production.Directions;
+import production.Floor;
 
 /**
  * @author josephtleiferman
  *
+ *only works when in production package!!!
  */
 public class getRouteTest {
 
