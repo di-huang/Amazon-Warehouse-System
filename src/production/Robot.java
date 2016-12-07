@@ -91,59 +91,49 @@ public class Robot implements Tickable{
 			case HeadingToShelf:
 				if(pos.equals(end)){
 					System.out.println(this+" is picking up the shelf...");
-					shelf.pickup();
-					state = State.HeadingToPicker;
 					carrying = true;
-					end = Floor.PICKER_WAITTING_AREA;
-					break;
+					if(suspend(1,tick)){
+						shelf.pickup();
+						state = State.HeadingToPicker;
+						end = Floor.PICKER_WAITTING_AREA;
+					}
 				}
 				route = Floor.getRoute(this, pos, end);
 				break;
 			case HeadingToPicker:
 				if(pos.equals(Floor.PICKER_WAITTING_AREA)){
 					System.out.println("Picker is pickng items...");
-					if(suspend(1,tick)){
-						end = shelf.home;
+					Belt.generateBin(currO);
+					if(suspend(2, tick)){
 						state = State.ReturningShelf;
 						carrying = true;
-						Item[] itemsOnShelf = ItemControl.onShelf(shelf);
-						for(ItemSlot is : currO.getItemSlots()){
-							for(Item i : itemsOnShelf){
-								if(i.match(is)){
-									System.out.println("Picker put " + i + "in the bin.");
-									is.setItem(i);
-									ItemControl.removeItem(i, shelf);
-									break;
-								}
-							}
-						}
-						Belt.doPicker(currO);
+						end = shelf.home;
+						Belt.doPicker(currO, shelf);
 					}
-					break;
 				}
 				route = Floor.getRoute(this, pos, end);
 				break;
 			case ReturningShelf:
 				if(pos.equals(end)){
 					System.out.println(this+" is putting down the shelf...");
-					shelf.putdown();
-					ItemInfo nxtinfo = currO.getUnfilledItemInfo();
-					if(currO.isAllFilled()){
-						System.out.println("Current order is fulfilled!");
-						currO = null;
+					carrying = false;
+					if(suspend(1, tick)){
+						shelf.putdown();
+						ItemInfo nxtinfo = currO.getUnfilledItemInfo();
+						if(currO.isAllFilled()){
+							System.out.println("Current order is fulfilled!");
+							currO = null;
+						}
+						if(nxtinfo == null){
+							shelf = null;
+							state = State.IDLE;
+						}else{
+							shelf = ItemControl.findItem(nxtinfo);
+							System.out.println("Target shelf: " + shelf.getPos());
+							state = State.HeadingToShelf;
+							end = shelf.getPos();
+						}
 					}
-					if(nxtinfo == null){
-						shelf = null;
-						state = State.IDLE;
-						carrying = false;
-					}else{
-						shelf = ItemControl.findItem(nxtinfo);
-						System.out.println("Target shelf: " + shelf.getPos());
-						state = State.HeadingToShelf;
-						carrying = false;
-						end = shelf.getPos();
-					}
-					break;
 				}
 				route = Floor.getRoute(this, pos, end);
 				break;
@@ -151,7 +141,6 @@ public class Robot implements Tickable{
 				if(pos.equals(end)){
 					state = State.Charging;
 					carrying = false;
-					break;
 				}
 				route = Floor.getRoute(this, pos, end);
 				break;
