@@ -87,7 +87,7 @@ public class Robot implements Tickable{
 						shelf.pickup();
 						state = State.HeadingToPicker;
 						end = Floor.PICKER_WAITTING_AREA;
-						route = Floor.getRoute(pos, end);
+						route = Floor.getRouteWithShelf(pos, end);
 					}
 				}
 				break;
@@ -97,7 +97,7 @@ public class Robot implements Tickable{
 					if(suspend(2,tick)){
 						end = shelf.home;
 						state = State.ReturningShelf;
-						route = Floor.getRoute(pos, end);
+						route = Floor.getRouteWithShelf(pos, end);
 						Item[] itemsOnShelf = ItemControl.onShelf(shelf);
 						for(ItemSlot is : currO.getItemSlots()){
 							for(Item i : itemsOnShelf){
