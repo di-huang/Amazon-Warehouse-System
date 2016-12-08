@@ -1,6 +1,11 @@
 package production;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
+
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * 
@@ -18,30 +23,31 @@ public class OrderControl implements Tickable{
 	}
 	public OrderControl(){
 		// schedule orders for testing
-		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(3)),new ItemSlot(Catalog.at(0))}));	// fork, pen
-		orderQueue.add(new Order("b st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
-		orderQueue.add(new Order("c st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0)),new ItemSlot(Catalog.at(5))}));// paper, pen, plate
-		orderQueue.add(new Order("d st", new ItemSlot[]{new ItemSlot(Catalog.at(2)),new ItemSlot(Catalog.at(2))}));	// book(2)
+		Random rd=new Random();
+		orderQueue.add(new Order("a st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(3)),new ItemSlot(Catalog.at(0))}));	// fork, pen
+		orderQueue.add(new Order("b st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	// spoon
+		orderQueue.add(new Order("c st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(0)),new ItemSlot(Catalog.at(5))}));// paper, pen, plate
+		orderQueue.add(new Order("d st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(2)),new ItemSlot(Catalog.at(2))}));	// book(2)
 		// more...
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
-		orderQueue.add(new Order("f st", new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(1))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(7)), new ItemSlot(Catalog.at(6))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(3)), new ItemSlot(Catalog.at(7))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(5))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(1))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(3))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(1))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
-		orderQueue.add(new Order("e st", new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("f st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(2))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(7)), new ItemSlot(Catalog.at(6))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(3)), new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(2)), new ItemSlot(Catalog.at(5))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(3))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(4))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(1)), new ItemSlot(Catalog.at(8)), new ItemSlot(Catalog.at(1))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(7))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(8))}));	
+		orderQueue.add(new Order("e st "+rd.nextInt(10000), new ItemSlot[]{new ItemSlot(Catalog.at(6))}));	
 		// ...
 	}
 	/**
@@ -78,12 +84,51 @@ public class OrderControl implements Tickable{
 	}
 	@Override
 	public void tick(int tick) {
+		DefaultTableModel model=null;
+		if(Production.getOG()!=null) {
+			Production.getOG().getTable_1().setModel(new DefaultTableModel(
+					new Object[][] {
+						{"Order name(address)", "Items"},
+					},
+					new String[] {
+						"Order name(address)", "Items"
+					}
+				));
+			model=(DefaultTableModel)Production.getOG().getTable_1().getModel();
+		}
 		for(Order o : pendingOrders){
+			if(model!=null)model.addRow(new Object[]{o.address, Arrays.toString(o.getItemSlots())});
 			if(o.isAllFilled()){
 				pendingOrders.remove(o);
 			}
 		}
+		model=null;
+		if(Production.getOG()!=null) {
+			Production.getOG().getTable().setModel(new DefaultTableModel(
+					new Object[][] {
+						{"Order name(address)", "Items"},
+					},
+					new String[] {
+						"Order name(address)", "Items"
+					}
+				));
+			model=(DefaultTableModel)Production.getOG().getTable().getModel();
+		}
+		for(Order o : orderQueue){
+			if(model!=null)model.addRow(new Object[]{o.address, Arrays.toString(o.getItemSlots())});
+		}
 		if(orderQueue.isEmpty()) {
+			if(Production.getOG()!=null) {
+			Production.getOG().getTable().setModel(new DefaultTableModel(
+					new Object[][] {
+						{"Order name(address)", "Items"},
+					},
+					new String[] {
+							"Order name(address)", "Items"
+					}
+				));
+			((DefaultTableModel)Production.getOG().getTable().getModel()).addRow(new Object[]{"empty", "empty"});
+			}
 			return;
 		}
 		Tick = tick;
@@ -91,11 +136,11 @@ public class OrderControl implements Tickable{
 			Order currO = orderQueue.poll();
 			System.out.println("=New Order=: " + currO);
 			if(!ItemControl.itemsAvailable(currO)){
-				System.out.println("There is no plenty stock for this order right now.");
+				System.out.println("OrderControl:There is no plenty stock for this order right now.");
 				orderQueue.add(currO);	// re-order right now
 				return;
 			}
-			System.out.println("New order is in pending.");
+			System.out.println("OrderControl:New order is in pending.");
 			pendingOrders.add(currO);
 		}
 	}

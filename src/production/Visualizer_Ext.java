@@ -1,5 +1,6 @@
 package production;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -10,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author dihuang, Wei Gui
+ * @author  Wei Gui
  *
  */
 
@@ -29,25 +29,6 @@ public class Visualizer_Ext {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Visualizer_Ext window = new Visualizer_Ext();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the application.
-	 */
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -125,6 +106,14 @@ public class Visualizer_Ext {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("OrderController");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OrderGUI dialog=new OrderGUI();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+				Production.setOG(dialog);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		
 		JLabel lblOveralldebugoutput = new JLabel("Overall_Debug_Output");

@@ -13,8 +13,15 @@ public class Production {
 	private static OrderControl O = new OrderControl();
 	private static Visualizer V = new Visualizer();
 	private static Master M = new Master(B, F, I, O, R, V);
+	private static OrderGUI OG;
 	public static Visualizer getV() {
 		return V;
+	}
+	public static OrderGUI getOG() {
+		return OG;
+	}
+	public static void setOG(OrderGUI og) {
+		OG=og;
 	}
 	public static void main(String[] args) {
 		M.setLimit(620);

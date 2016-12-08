@@ -82,14 +82,14 @@ public class ItemControl implements Tickable {
 	 * @author Ted Herman, Di Huang
 	 */
 	public static Shelf findItem(ItemInfo info) {
-		System.out.println("Finding item"+info+"on shelves...");
+		System.out.println("ItemControl:Finding item"+info+"on shelves...");
 		for (Item e : stock) {
 			if (!e.getHolder().onFloor())
 				continue; // ignore moving shelves
 			if (e.itemInfo.equals(info))
 				return e.getHolder();
 		}
-		System.out.println("There are no enough item, so doing magic replenishments...");
+		System.out.println("ItemControl:There are no enough item, so doing magic replenishments...");
 		// even though this is going to return null (out of stock)
 		// go ahead and put the needed item somewhere, like on another
 		// shelf

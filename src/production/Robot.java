@@ -73,13 +73,13 @@ public class Robot implements Tickable{
 				if(!pendingOrders.isEmpty() && currO == null){// has work to do~ (currO reset to null when order is fulfilled in ReturnShelf case)
 					currO = pendingOrders.poll();
 					shelf = ItemControl.findItem(currO.getUnfilledItemInfo());
-					System.out.println("Target shelf: " + shelf.getPos());
+					System.out.println(this+":New Order! Target shelf: " + shelf.getPos());
 					state = State.HeadingToShelf;
 					carrying = false;
 					end = shelf.getPos();
 					route = Floor.getRoute(this, pos, end);
 				}else if(pendingOrders.isEmpty()){				// no job now :(
-					System.out.println("There's no order right now.");
+					System.out.println(this+":There's no order right now.");
 					if(!pos.equals(Floor.CHARGER)){
 						end = Floor.CHARGER;		// backing to home
 						route = Floor.getRoute(this, pos, end);
@@ -102,7 +102,7 @@ public class Robot implements Tickable{
 				break;
 			case HeadingToPicker:
 				if(pos.equals(Floor.PICKER_WAITTING_AREA)){
-					System.out.println("Picker is pickng items...");
+					System.out.println(this+":Picker is pickng items...");
 					Belt.generateBin(currO);
 					if(suspend(2, tick)){
 						state = State.ReturningShelf;
@@ -121,7 +121,7 @@ public class Robot implements Tickable{
 						shelf.putdown();
 						ItemInfo nxtinfo = currO.getUnfilledItemInfo();
 						if(currO.isAllFilled()){
-							System.out.println("Current order is fulfilled!");
+							System.out.println(this+":Current order is fulfilled!");
 							currO = null;
 						}
 						if(nxtinfo == null){
@@ -129,7 +129,7 @@ public class Robot implements Tickable{
 							state = State.IDLE;
 						}else{
 							shelf = ItemControl.findItem(nxtinfo);
-							System.out.println("Target shelf: " + shelf.getPos());
+							System.out.println(this+":Continue on current Order,Target shelf: " + shelf.getPos());
 							state = State.HeadingToShelf;
 							end = shelf.getPos();
 						}

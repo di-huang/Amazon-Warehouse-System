@@ -1,40 +1,76 @@
 package production;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class OrderGUI extends JDialog {
-
+	/**
+	 * 
+	 * @author  Wei Gui
+	 *
+	 */
 	private final JPanel contentPanel = new JPanel();
+	private JTable table;
+	private JTable table_1;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			OrderGUI dialog = new OrderGUI();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public OrderGUI() {
 		setTitle("OrderController");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 574, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		java.awt.Point offsetpoint= (java.awt.Point)Production.getV().getFrame().getLocation().clone();
+		offsetpoint.translate(0,-310);
+		this.setLocation(offsetpoint);
+		this.setResizable(false);
+		contentPanel.setLayout(null);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 11, 413, 116);
+		contentPanel.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		table.setRowSelectionAllowed(false);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Order name(address)", "Items"},
+			},
+			new String[] {
+				"Order name(address)", "Items"
+			}
+		));
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 138, 413, 116);
+		contentPanel.add(scrollPane);
+		
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
+		table_1.setRowSelectionAllowed(false);
+		table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+					{"Order name(address)", "Items"},
+				},
+				new String[] {
+					"Order name(address)", "Items"
+				}
+			));
 	}
 
+	public JTable getTable() {
+		return table;
+	}
+
+	public JTable getTable_1() {
+		return table_1;
+	}
 }

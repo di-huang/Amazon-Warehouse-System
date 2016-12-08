@@ -58,7 +58,7 @@ public class Belt implements Tickable{
 		for(ItemSlot is : order.getItemSlots()){
 			for(Item i : itemsOnShelf){
 				if(i.match(is)){
-					System.out.println("Picker put " + i + "in the bin.");
+					System.out.println("Belt-Picker:Picker put " + i + "in the bin.");
 					is.setItem(i);
 					ItemControl.removeItem(i, shelf);
 					break;
