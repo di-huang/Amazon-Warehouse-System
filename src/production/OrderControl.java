@@ -3,9 +3,7 @@ package production;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
-
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  * 
