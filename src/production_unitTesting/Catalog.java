@@ -1,6 +1,6 @@
-package production;
+package production_unitTesting;
 
-import production.ItemInfo;
+import production_unitTesting.ItemInfo;
 
 /**
  * 
