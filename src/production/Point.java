@@ -53,28 +53,16 @@ public class Point {
 				return new Point(x-1, y);
 			case RIGHT:
 				return new Point(x+1, y);
-			default:
-				return null;		// stay when d is null
 		}
+		return this;	// stay
 	}
 	public boolean out(){
-		return x < 0 || y < 0;
+		int x_upperbound = Floor.width/Floor.gridSize-1;
+		int y_upperbound = Floor.height/Floor.gridSize-1;
+		return x < 1 || y < 0 || x > x_upperbound || y > y_upperbound;
 	}
 	public boolean closeTo(Directions d, Point end){
 		Point next = this.nextpoint(d);
-		double nX = (next.getX()-end.getX()) * (next.getX()-end.getX());
-		double nY = (next.getY()-end.getY()) * (next.getY()-end.getY());
-		double nDis =  Math.sqrt(nX+nY);
-		double cX = (this.x-end.getX()) * (this.getX()-end.getX());
-		double cY = (this.y-end.getY()) * (this.y-end.getY());
-		double cDis =  Math.sqrt(cX+cY);
-		if(nDis<cDis){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public boolean closeTo(Point next, Point end){
 		double nX = (next.getX()-end.getX()) * (next.getX()-end.getX());
 		double nY = (next.getY()-end.getY()) * (next.getY()-end.getY());
 		double nDis =  Math.sqrt(nX+nY);
