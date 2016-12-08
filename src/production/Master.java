@@ -9,7 +9,6 @@ public class Master implements Runnable {
 	private int limit = 100;					// default: limit = 100 ticks
 	private int unitTime = 1000;				// default: 1 second per tick
 	private boolean running = false;
-	private boolean killing = false;
 	private volatile Thread me=new Thread(this);
 	private Belt B;
 	@SuppressWarnings("unused")
