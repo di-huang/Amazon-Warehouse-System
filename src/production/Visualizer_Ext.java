@@ -76,6 +76,7 @@ public class Visualizer_Ext {
 		offsetpoint.translate(Production.getV().getFrame().getWidth()+10,0);
 		frame.setLocation(offsetpoint);
 		frame.setResizable(false);
+		frame.setAlwaysOnTop(true);
 		frame.getContentPane().setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
