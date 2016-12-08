@@ -49,21 +49,31 @@ public class TestOrders {
 		/**
 		 * @author Charles Carlson
 		 * 
-		 * 9 Items for 9 Orders
-		 * These used for now until packages fixed... then testing will be done with ItemControl
-		 * 
+		 * 9 Items to be added to the Inventory
 		 */
-		Item RED_SHIRT = new Item("RED_SHIRT", 200, "1");
-		Item BLUE_SHIRT = new Item("BLUE_SHIRT", 300, "1");
-		Item BICYCLE = new Item("BICYCLE", 2, "2");
-		Item BASKETBALL = new Item("BASKETBALL", 50, "2");
-		Item SHAVING_CREAM= new Item("SHAVING_CREAM", 10, "3");
-		Item DUCT_TAPE = new Item("DUCT_TAPE", 1, "3");
-		Item BOOK = new Item("BOOK", 20, "4");
-		Item EGG_PLANT = new Item("EGG_PLANT", 2000, "5");
-		Item FLUTE = new Item("FLUTE", 5, "6");
-		Item KITE = new Item("KITE", 1, "7");
-		Item SKI_POLE = new Item("SKI_POLE",3,"3"); 
+		OrderItem RED_SHIRT = new OrderItem("RED_SHIRT", 200, "1");
+		OrderItem BLUE_SHIRT = new OrderItem("BLUE_SHIRT", 300, "1");
+		OrderItem BICYCLE = new OrderItem("BICYCLE", 2, "2");
+		OrderItem BASKETBALL = new OrderItem("BASKETBALL", 50, "2");
+		OrderItem SHAVING_CREAM= new OrderItem("SHAVING_CREAM", 10, "3");
+		OrderItem DUCT_TAPE = new OrderItem("DUCT_TAPE", 1, "3");
+		OrderItem BOOK = new OrderItem("BOOK", 20, "4");
+		OrderItem EGG_PLANT = new OrderItem("EGG_PLANT", 2000, "5");
+		OrderItem FLUTE = new OrderItem("FLUTE", 5, "6");
+		//Item created but will not be added to ItemController, to test if checks are working
+		OrderItem KITE = new OrderItem("KITE", 1, "7");
+		OrderItem SKI_POLE = new OrderItem("SKI_POLE",3,"3"); 
+		
+		I.addItem(RED_SHIRT);
+		I.addItem(BLUE_SHIRT);
+		I.addItem(BICYCLE);
+		I.addItem(BASKETBALL);
+		I.addItem(SHAVING_CREAM);
+		I.addItem(BOOK);
+		I.addItem(FLUTE);
+		//commented out for testing
+		//I.addItem(KITE);
+		I.addItem(SKI_POLE);
 		
 		
 		/**
