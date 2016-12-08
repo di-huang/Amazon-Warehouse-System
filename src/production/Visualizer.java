@@ -165,8 +165,9 @@ public class Visualizer implements Tickable{
 			}
 
 			// Robot
-			Robot r = RobotScheduler.robots[0];
+			for(Robot r:RobotScheduler.robots) {
 			paintRobot(r, g);
+			}
 
 			// Bin
 			for(Bin b : Belt.getBelt1()){

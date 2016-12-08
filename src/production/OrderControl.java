@@ -128,7 +128,7 @@ public class OrderControl implements Tickable{
 			return;
 		}
 		Tick = tick;
-		if(suspend(10,tick)){	// poll an order every 10 ticks
+		if(suspend(4,tick)){	// poll an order every 10 ticks
 			Order currO = orderQueue.poll();
 			System.out.println("=New Order=: " + currO);
 			if(!ItemControl.itemsAvailable(currO)){

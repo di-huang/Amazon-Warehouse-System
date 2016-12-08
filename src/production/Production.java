@@ -42,7 +42,9 @@ public class Production {
 		if(V.getext()!=null)V.getext().callfinalize();
 		V.getFrame().setVisible(false);
 		V.getFrame().dispose();
+		if(OG!=null) {
 		OG.dispose();
+		}
 		System.gc();
 		F=new Floor();
 		B = new Belt();
@@ -57,6 +59,9 @@ public class Production {
 	}
 	public static Master getM() {
 		return M;
+	}
+	public static RobotScheduler getR() {
+		return R;
 	}
 		
 }
