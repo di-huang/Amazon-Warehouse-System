@@ -34,6 +34,7 @@ public class OrderGUI extends JDialog {
 		offsetpoint.translate(0,-310);
 		this.setLocation(offsetpoint);
 		this.setResizable(false);
+		this.setAlwaysOnTop(true);
 		contentPanel.setLayout(null);
 		
 		scrollPane_1 = new JScrollPane();
