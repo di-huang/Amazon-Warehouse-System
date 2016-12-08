@@ -3,6 +3,7 @@ package production;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +20,17 @@ public class Visualizer implements Tickable{
 	public static final String TITLE = "Warehouse System";
 	private Screen screen;
 	private Master M;
+	private Visualizer_Ext ext=null;
+	private JFrame f = new JFrame("Warehouse System");
+	public JFrame getFrame() {
+		return f;
+	}
+	public Visualizer_Ext getext() {
+		return ext;
+	}
+	public void setext(Visualizer_Ext set) {
+		ext=set;
+	}
 	public Visualizer(){
 		createAndShowGUI();
 	}
@@ -26,9 +38,11 @@ public class Visualizer implements Tickable{
 		this.M = M;
 	}
 	private void createAndShowGUI(){
-		JFrame f = new JFrame("Warehouse System");
 		f.setResizable(false);
 		f.setLocationRelativeTo(null);
+		java.awt.Point tempp=GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+		tempp.translate(-Floor.width/2, -Floor.height/2);
+		f.setLocation(tempp);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		screen = new Screen();
@@ -48,8 +62,21 @@ public class Visualizer implements Tickable{
 				M.stop();
 			}
 		});
+		JButton ext_jb = new JButton("Extension");
+		ext_jb.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				try {
+					extPressed();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		screen.add(start_jb);
 		screen.add(stop_jb);
+		screen.add(ext_jb);
 		f.add(screen);
 		f.pack();
 		f.setAlwaysOnTop(true);
@@ -196,5 +223,15 @@ public class Visualizer implements Tickable{
 	@Override
 	public boolean suspend(int suspticks, int currtick) {
 		return false;
+	}
+	private void extPressed() throws Throwable {
+		if(ext!=null) {
+			ext.getFrame().setVisible(false);
+			ext.callfinalize();
+			ext=null;
+		} else {
+			ext=new Visualizer_Ext(this);
+			ext.getFrame().setVisible(true);
+		}
 	}
 }
