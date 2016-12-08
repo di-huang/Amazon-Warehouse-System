@@ -185,8 +185,8 @@ public class Visualizer implements Tickable{
 			g.setColor(Color.BLACK);
 			int X = offset + x*gridSize;
 			int Y = offset + y*gridSize;
-			for(int i = 1; i < gridSize/2; i++){
-				int yt = Y + i*2;
+			for(int i = 1; i < gridSize/5; i++){
+				int yt = Y + i*5;
 				g.drawLine(X, yt, X+gridSize, yt);
 			}
 		}
