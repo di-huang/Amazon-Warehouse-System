@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author josephtleiferman,Wei Gui
+ * @author josephtleiferman
  * 
  *
  */
