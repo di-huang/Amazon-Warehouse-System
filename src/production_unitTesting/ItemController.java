@@ -10,12 +10,13 @@ import production_unitTesting.Report;
  * @author wangyang xu 
  * @author Charles Carlson
  * 		-modified this to work with OrderItems and ItemController
- * it is OrderItem control system, including checking item available, adding item, reduece item quantity.
+ * it is OrderItem control system, including checking item available, adding item, reduce item quantity.
  */
  
 public class ItemController {
 	/**
-	 * This works as the inventory subsystem
+	 * This works as the inventory subsystem 
+	 * 	-just for unit testing Order Control @author Charles Carlson
 	 */
 	private static HashMap<String, OrderItem> inventory;
 
@@ -37,5 +38,25 @@ public class ItemController {
 			return false; }
 		return inventory.get(i.getOrderItemName()).getOrderItemQuantity() >= i.getOrderItemQuantity();
 		// check whether the item and the quantity of the item can meet the requirement of order
+	}
+	
+	/**
+	 * @author Charles Carlson
+	 * @param i
+	 * @return boolean
+	 * 
+	 * I decided to split up itemAvailable(OrderItem i) because by doing so you can give the costumer more detail as to exactly why their Order cannot go through
+	 * It could be because we simply don't stock the item
+	 * or it could be that we are currently insufficient on stock to fill that Order at this time
+	 */
+	public static boolean itemExists(OrderItem i ) {
+		if(!inventory.containsKey(i.getOrderItemName())) {
+			return false;
+		}
+		else { return true; }
+	}
+	
+	public static boolean itemQuantityClears(OrderItem i, Order o) {
+		return inventory.get(i.getOrderItemName()).getOrderItemQuantity() >= o.getQuantity();
 	}
 }

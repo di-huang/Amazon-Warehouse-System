@@ -1,27 +1,10 @@
-/**
- * @author Charles Carlson
- * 
- * CURRENT ISSUES: 
- * 	want to use static methods from ItemControl but cannot because the packages are all wrong because I can't pull from GitHub for some reason
- * HOW TO FIX: 
- * 	first have to figure out GitHub bug/error. 
- * 	then change the packages.
- * 	there will be many many errors at first but they should be easily fixed. 
- * 	change my methods to static
- */
-
-
-/**
- * 
+/** 
  * @author Charles Carlson
  * 
  * definitions in regards to Orders
  * 
  * CLEARED: The Order has passed through Order Control which has confirmed that the Inventory contains the Item(s) of the Order and can support the quantity requested
  * NOT CLEARED: If one of the criteria above fails, the Item is NOT CLEARED, and the Order is abandoned.
- * 
- * would be cool if we could re-upload the Order to the end of Pending Orders so that potentially on its next time around it will be cleared.
- * this only makes sense if the Inventory is regularly updated. Probably not going to happen.
  */
 package production_unitTesting;
 
@@ -38,10 +21,8 @@ public class TestOrders {
 	 * goal is to only use the ItemControl "catalog" and delete the 9 Items created below
 	 * though whether I use Items created below or Items from ItemControl Order Control should act the same
 	 */
-	
 	@Test
 	public void test() {
-
 
 		OrderControl O = new OrderControl();
 		ItemController I = new ItemController();
@@ -56,7 +37,8 @@ public class TestOrders {
 		OrderItem BICYCLE = new OrderItem("BICYCLE", 2, "2");
 		OrderItem BASKETBALL = new OrderItem("BASKETBALL", 50, "2");
 		OrderItem SHAVING_CREAM= new OrderItem("SHAVING_CREAM", 10, "3");
-		OrderItem DUCT_TAPE = new OrderItem("DUCT_TAPE", 1, "3");
+		//Item created but will not clear because the quantity requested is too great
+		OrderItem DUCT_TAPE = new OrderItem("DUCT_TAPE", 2, "3");
 		OrderItem BOOK = new OrderItem("BOOK", 20, "4");
 		OrderItem EGG_PLANT = new OrderItem("EGG_PLANT", 2000, "5");
 		OrderItem FLUTE = new OrderItem("FLUTE", 5, "6");
@@ -69,12 +51,13 @@ public class TestOrders {
 		I.addItem(BICYCLE);
 		I.addItem(BASKETBALL);
 		I.addItem(SHAVING_CREAM);
+		I.addItem(DUCT_TAPE);
+		I.addItem(EGG_PLANT);
 		I.addItem(BOOK);
 		I.addItem(FLUTE);
 		//commented out for testing
 		//I.addItem(KITE);
 		I.addItem(SKI_POLE);
-		
 		
 		/**
 		 * @author Charles Carlson
@@ -95,7 +78,6 @@ public class TestOrders {
 		//can't actually test until packages fixed
 		Order order10 = new Order(KITE, 2,"999 Street");
 		
-		
 		/**
 		 * @author Charles Carlson
 		 * 
@@ -112,11 +94,15 @@ public class TestOrders {
 		O.addOrder(order9);
 		O.addOrder(order10);
 		
-		
 		/**
 		 * @author Charles Carlson
 		 * 
 		 * set up and run unit test
+		 * 
+		 * there are not very many Orders being tested but Order Control is being asked to handle every possible situation:
+		 * 	1. the item is stocked in the ItemController, there is enough stock in ItemController to support the Order
+		 * 	2. the item is not stocked in the ItemController, ***It obviously won't check if it can support the quantity if it knows it doesn't have it
+		 * 	3. The item is stocked however we do not currently have the quantity stocked to support the Order
 		 */
 		System.out.println("The followng are requested Items that will be run through Order Control to check if clearable");
 		
@@ -130,9 +116,6 @@ public class TestOrders {
 			O.tick(i);
 		}
 		
-		System.out.println("Test completed");
-		
-			
-	}
-	
+		System.out.println("Test completed");			
+	}	
 }

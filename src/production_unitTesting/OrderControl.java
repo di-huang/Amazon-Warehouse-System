@@ -1,11 +1,6 @@
-
 package production_unitTesting;
 
-
-
-
 import java.util.*;
-
 
 public class OrderControl implements Tickable {
 	
@@ -109,27 +104,42 @@ public class OrderControl implements Tickable {
 		//Current Order becomes first Order in the Order Queue
 		if(currentOrder == null) {
 			currentOrder = orderQueue.pop();
-			System.out.println("OrderControll starts a new Order:  " 
+			System.out.println("OrderControl starts a new Order:  " 
 					+ "|| Item: " + currentOrder + 
 					", Quantity: " + currentOrder.getQuantity() + 
 					", Shipping Address: " + currentOrder.getShippingAddress() + " ||");
 		}
 		
 		//check if the inventory can support the Order
-		String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
+		/*String currentOrderShelf = currentOrder.getItemBeingOrderedShelfID();
 		if(currentOrderShelf == null) {
 			System.out.println("[Current Order " + currentOrder + " cannot be CLEARED at this time");
+			Integer s = currentOrder.getItemBeingOrdered().subtract(currentOrder);
+			System.out.println("STOCK REMAINING: " + s);
+			System.out.println("Beginning Next Order...");
+			System.out.println("\n");
+			currentOrder = null;
+			return; //tick because this Order cannot be completed
+		}*/
+		
+		//the ItemController CANNOT support the order because it does not possess the Item
+		if(!ItemController.itemExists(currentOrder.getItemBeingOrdered())) {
+			System.out.println("[Current Order " + currentOrder + " cannot be CLEARED at this time]");
 			System.out.println("Reason: Item not found in Inventory");
+			System.out.println("STOCK REMAIING: 0");
+			System.out.println("Beginning Next Order...");
+			System.out.println("\n");
 			currentOrder = null;
 			return; //tick because this Order cannot be completed
 		}
 
-		//the inventory can support the Order
-		System.out.println("Item found in Inventory");
-		
-		//errors unavoidable
-		if(!ItemController.itemAvailable(currentOrder.getItemBeingOrdered())) {
-			System.out.println("The Inventory CANNOT support an Order of that quantity");
+		//The ItemController CANNOT support the Order because of quantity
+		if(!ItemController.itemQuantityClears(currentOrder.getItemBeingOrdered(), currentOrder)) {
+			System.out.println("[Current Order " + currentOrder + " cannot be CLEARED at this time]");
+			System.out.println("Reason: Inventory cannot support the quantity requested");
+			System.out.println("STOCK REMAINING; " + currentOrder.getItemBeingOrdered().getOrderItemQuantity());
+			System.out.println("Beginning Next Order...");
+			System.out.println("\n");
 			currentOrder = null;
 			return;
 		}
@@ -138,6 +148,8 @@ public class OrderControl implements Tickable {
 		System.out.println("The Inventory CAN support that Order quantity");
 		System.out.println( "[Current Order " + currentOrder +  " has been CLEARED]");
 		if(lastPendingOrder!=1) {
+			Integer s = currentOrder.getItemBeingOrdered().subtract(currentOrder);
+			System.out.println("STOCK REMAINING: " + s);
 			System.out.println("Beginning Next Order...");
 			System.out.println("\n");
 		}
