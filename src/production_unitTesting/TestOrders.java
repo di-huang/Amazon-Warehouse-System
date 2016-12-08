@@ -80,7 +80,6 @@ public class TestOrders {
 		 * @author Charles Carlson
 		 * 
 		 * Orders are created with Items(above, not from ItemControl), quantity, and shipping address
-		 * using above Items for now, with proper package it will use ItemControl
 		 */
 		Order order1 = new Order(RED_SHIRT, 2, "501 South Dodge Street");
 		Order order2 = new Order(BLUE_SHIRT, 5, "313 South Gilbert Street");
