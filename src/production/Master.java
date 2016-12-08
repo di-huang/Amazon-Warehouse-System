@@ -49,6 +49,7 @@ public class Master implements Runnable {
 			return;
 		}
 		running = true;
+		me=new Thread(this);
 		me.start();
 	}
 	public void stop(){
