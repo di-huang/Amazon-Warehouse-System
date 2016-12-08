@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
-import production.Directions;
+import production_unitTesting.Directions;
 import production.Floor;
 
 /**
