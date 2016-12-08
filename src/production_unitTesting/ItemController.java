@@ -17,7 +17,7 @@ public class ItemController {
 	/**
 	 * This works as the inventory subsystem
 	 */
-	private HashMap<String, OrderItem> inventory;
+	private static HashMap<String, OrderItem> inventory;
 
 	public ItemController() {
 		inventory = new HashMap<String, OrderItem>();
@@ -27,12 +27,12 @@ public class ItemController {
 		this.inventory = database;
 	}
 	
-	public void addItem(OrderItem i){
+	public static void addItem(OrderItem i){
 		inventory.put(i.getOrderItemName(), i);
 		// if the quantity of the item lower then the minimum (set by administrator), we should additem
 	}
 	
-	public boolean itemAvailable(OrderItem i) {
+	public static boolean itemAvailable(OrderItem i) {
 		if (!inventory.containsKey(i.getOrderItemName())) {
 			return false; }
 		return inventory.get(i.getOrderItemName()).getOrderItemQuantity() >= i.getOrderItemQuantity();

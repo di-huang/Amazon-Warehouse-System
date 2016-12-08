@@ -132,11 +132,11 @@ public class OrderControl implements Tickable {
 
 
 		//errors unavoidable
-		/*if(!ItemController.itemAvailable(currentOrder.getItemBeingOrdered())) {
+		if(!ItemController.itemAvailable(currentOrder.getItemBeingOrdered())) {
 			System.out.println("The Inventory CANNOT support an Order of that quantity");
 			currentOrder = null;
 			return;
-		}*/
+		}
 		
 		
 		//success.... the inventory can support the Order
