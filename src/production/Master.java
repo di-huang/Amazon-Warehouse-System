@@ -81,7 +81,9 @@ public class Master implements Runnable {
 		I.tick(tick);
 		B.tick(tick);
 		V.tick(tick);
+		if(V.getext()!=null) {
 		V.getext().getTextField().setText(Integer.toString(tick));
+		}
 	}
 	public int getLimit() {
 		return limit;
