@@ -20,6 +20,9 @@ public class Production {
 	public static OrderGUI getOG() {
 		return OG;
 	}
+	public static OrderControl getO() {
+		return O;
+	}
 	public static void setOG(OrderGUI og) {
 		OG=og;
 	}

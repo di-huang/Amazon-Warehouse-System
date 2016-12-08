@@ -34,7 +34,7 @@ public class Master implements Runnable {
 	public void run() {
 		Thread thisThread = Thread.currentThread();
 		while (running && tick < limit && me==thisThread) {
-			System.out.println("tick " + tick);
+			System.out.println("Master:tick " + tick);
 			tick(tick);
 			System.out.println();
 			unitTime();

@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class OrderGUI extends JDialog {
@@ -64,6 +67,15 @@ public class OrderGUI extends JDialog {
 					"Order name(address)", "Items"
 				}
 			));
+		
+		JButton btnNewButton = new JButton("<html>Randomly Gen a<br />new Order &<br /> add it into the queue</html>");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Production.getO().rd();
+			}
+		});
+		btnNewButton.setBounds(433, 14, 125, 240);
+		contentPanel.add(btnNewButton);
 	}
 
 	public JTable getTable() {
