@@ -24,8 +24,8 @@ public class Floor {
     public static final Point PACKER = new Point(1,2,"PACKER");
     public static Point[] PICKERBELT = { new Point(0,5,"PICKERBELT5"),new Point(0,4,"PICKERBELT4"),new Point(0,3,"PICKERBELT3") };
     public static Point[] PACKERBELT = { new Point(0,2,"PICKERBELT2"),new Point(0,1,"PICKERBELT1"),new Point(0,0,"PICKERBELT0") };
-	public static final int width = 60, height = 60;
-	public static final int gridSize = 10;
+	public static final int width = 300, height = 300;
+	public static final int gridSize = 50;
 	public static final int UPPERB = 5;
     public static final int LOWERB = 0;
     
