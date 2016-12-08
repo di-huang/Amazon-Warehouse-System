@@ -10,16 +10,18 @@ import java.util.LinkedList;
 public class Robot implements Tickable{
 	String ID;
 	Point pos;
-	LinkedList<Directions> route;
+	final Point home;
+	Directions nd;	// next direction
 	State state;
 	Shelf shelf;
 	Order currO;
 	boolean carrying;
-	int battery = 40;	// full battery is 40
+	int battery = 50;	// full battery is 50
 	public Robot(String id, Point p) {
 		ID = id;
 		pos = p;
-		route = null;
+		home = p;
+		nd = null;
 		state = State.IDLE;
 		shelf = null;
 		currO = null;
@@ -34,7 +36,6 @@ public class Robot implements Tickable{
 	public Point getPOS() {
 		return pos;
 	}
-	Point end;
 	private int lasttick = -1;
 	private int Tick = 0;
 	@Override
@@ -49,6 +50,7 @@ public class Robot implements Tickable{
 			return false;
 		}
 	}
+	Point end = null;
 	@Override
 	public void tick(int tick) {
 		Tick = tick;
@@ -61,103 +63,109 @@ public class Robot implements Tickable{
 		}
 		switch(state){
 			case IDLE:
-				if(battery <= 15){	// low battery is 15
+				if(battery <= 10){	// low battery is 10
 					System.out.println(this+" has low battery("+battery+")");
 					state = State.GoingToCharge;
 					carrying = false;
-					end = Floor.CHARGER;
-					route = Floor.getRoute(this, pos, end);
+					end = home;
+					nd = Floor.getDirection(this, pos, end);
 					break;
 				}
 				LinkedList<Order> pendingOrders = OrderControl.getPendingOrders();
-				if(!pendingOrders.isEmpty() && currO == null){// has work to do~ (currO reset to null when order is fulfilled in ReturnShelf case)
+				if(!pendingOrders.isEmpty() && currO == null){// has work to do~ (currO reset to null when order is fulfilled)
 					currO = pendingOrders.poll();
 					shelf = ItemControl.findItem(currO.getUnfilledItemInfo());
-					System.out.println(this+":New Order! Target shelf: " + shelf.getPos());
+					System.out.println("Target shelf: " + shelf.getPos());
 					state = State.HeadingToShelf;
 					carrying = false;
 					end = shelf.getPos();
-					route = Floor.getRoute(this, pos, end);
-				}else if(pendingOrders.isEmpty()){				// no job now :(
-					System.out.println(this+":There's no order right now.");
-					if(!pos.equals(Floor.CHARGER)){
-						end = Floor.CHARGER;		// backing to home
-						route = Floor.getRoute(this, pos, end);
+					nd = Floor.getDirection(this, pos, end);
+				}else if(pendingOrders.isEmpty()){	// no job now :(
+					System.out.println("There's no order right now.");
+					if(!pos.equals(home)){
+						end = home;		// backing to home
+						nd = Floor.getDirection(this, pos, end);
 					}else{
-						route = null;
+						nd = null;
 					}
 				}
 				break;
 			case HeadingToShelf:
 				if(pos.equals(end)){
 					System.out.println(this+" is picking up the shelf...");
-					carrying = true;
+					nd = null;
 					if(suspend(1,tick)){
 						shelf.pickup();
+						carrying = true;
 						state = State.HeadingToPicker;
 						end = Floor.PICKER_WAITTING_AREA;
 					}
+					break;
 				}
-				route = Floor.getRoute(this, pos, end);
+				nd = Floor.getDirection(this, pos, end);
 				break;
 			case HeadingToPicker:
 				if(pos.equals(Floor.PICKER_WAITTING_AREA)){
-					System.out.println(this+":Picker is pickng items...");
+					System.out.println("Picker is pickng items...");
 					Belt.generateBin(currO);
+					nd = null;
 					if(suspend(2, tick)){
 						state = State.ReturningShelf;
 						carrying = true;
 						end = shelf.home;
 						Belt.doPicker(currO, shelf);
 					}
+					break;
 				}
-				route = Floor.getRoute(this, pos, end);
+				nd = Floor.getDirection(this, pos, end);
 				break;
 			case ReturningShelf:
 				if(pos.equals(end)){
 					System.out.println(this+" is putting down the shelf...");
-					carrying = false;
+					nd = null;
 					if(suspend(1, tick)){
 						shelf.putdown();
+						carrying = false;
 						ItemInfo nxtinfo = currO.getUnfilledItemInfo();
-						if(currO.isAllFilled()){
-							System.out.println(this+":Current order is fulfilled!");
-							currO = null;
-						}
 						if(nxtinfo == null){
+							System.out.println("Current order is fulfilled!");
+							currO = null;
 							shelf = null;
 							state = State.IDLE;
 						}else{
 							shelf = ItemControl.findItem(nxtinfo);
-							System.out.println(this+":Continue on current Order,Target shelf: " + shelf.getPos());
+							System.out.println("Target shelf: " + shelf.getPos());
 							state = State.HeadingToShelf;
 							end = shelf.getPos();
 						}
 					}
+					break;
 				}
-				route = Floor.getRoute(this, pos, end);
+				nd = Floor.getDirection(this, pos, end);
 				break;
 			case GoingToCharge:
 				if(pos.equals(end)){
+					nd = null;
 					state = State.Charging;
 					carrying = false;
+					break;
 				}
-				route = Floor.getRoute(this, pos, end);
+				nd = Floor.getDirection(this, pos, end);
 				break;
 			case Charging:
 				System.out.println(this+" is charging itself.");
-				if(battery < 40){
+				if(battery < 50){
 					battery += 10;
-					if(battery > 40){
-						battery = 40;
+					if(battery > 50){
+						battery = 50;
 					}
 				}else{
 					state = State.IDLE;
 					carrying = false;
 				}
 		}
-		if(route != null && !route.isEmpty()){
-			pos = nextpoint(pos, route.removeFirst());
+		if(nd != null){
+			pos = nextpoint();
 		}
 		if(shelf != null && !shelf.onFloor()){
 			shelf.setPos(pos);
@@ -172,19 +180,19 @@ public class Robot implements Tickable{
 	public String toString() {
 		return "Robot"+ID;
 	}
-	public Point nextpoint(Point pos,Directions d) {
-		if(d==Directions.DOWN) {
+	public Point nextpoint() {
+		if(nd == Directions.DOWN) {
 			return new Point(pos.getX(), pos.getY()+1);
 		}
-		if(d==Directions.UP) {
+		if(nd == Directions.UP) {
 			return new Point(pos.getX(), pos.getY()-1);
 		}
-		if(d==Directions.LEFT) {
+		if(nd == Directions.LEFT) {
 			return new Point(pos.getX()-1, pos.getY());
 		}
-		if(d==Directions.RIGHT) {
+		if(nd == Directions.RIGHT) {
 			return new Point(pos.getX()+1, pos.getY());
 		}
-		return null;
+		return pos;	//stay
 	}
 }
