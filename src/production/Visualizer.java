@@ -204,6 +204,8 @@ public class Visualizer implements Tickable{
 			int xRobot = pos.getX();
 			int yRobot = pos.getY();
 			g.fillRect(xRobot*gridSize+offset+10, yRobot*gridSize+offset+10, gridSize-20, gridSize-20);
+			g.setColor(Color.RED);
+			g.drawString(r.ID, xRobot*gridSize+offset+21, yRobot*gridSize+offset+28);
 		}
 		void paintShelf(Point pos, Graphics g){
 			g.setColor(Color.WHITE);
