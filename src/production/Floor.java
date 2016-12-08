@@ -36,40 +36,36 @@ public class Floor {
 	    		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)};
 		FLOOR_LOCATIONS = new HashMap<>();
 	}
-    /**
+	/**
      * @author dihuang
-     * Generating dynamic route(improve applicability and expandability), so we have to call this method each tick. 
+     * Generating dynamic next direction(improve applicability and expandability), so we have to call this method each tick. 
      * Robot calls this method currently.
      * @param robot, start point, end point
-     * @return dynamic route
+     * @return dynamic direction
      */
-    public static LinkedList<Directions> getRoute(Robot robot, Point start, Point end) {
-		LinkedList<Directions> route = new LinkedList<>();
-        Point currP = start;	// current point
+    public static Directions getDirection(Robot robot, Point curP, Point end) {
+    	if(curP.equals(end)) return null;
+    	Directions[] directions = {Directions.UP, Directions.DOWN, Directions.LEFT, Directions.RIGHT};
         Point nxtP = null;		// next point
-        Directions[] directions = {Directions.UP, Directions.DOWN, Directions.LEFT, Directions.RIGHT};
         Directions opD = null;	//optimal direction
-        while(!currP.equals(end)){
-        	outter:for(Directions d : directions){
-        		nxtP = currP.nextpoint(d);
-        		if(robot.carrying){
-        			for(Shelf s : SHELVES){
-            			if(nxtP.equals(s.getPos()) || nxtP.out()){
-            				continue outter;
-            			}
-            		}
+        outter:for(Directions d : directions){
+    		nxtP = curP.nextpoint(d);	// curP: current point
+    		if(nxtP.out()) continue;	// out of map
+    		if(robot.carrying){
+    			for(Shelf s : SHELVES){
+    				if(s == robot.shelf) continue;	// exclude itself
+        			if(nxtP.equals(s.getPos())){
+        				continue outter;
+        			}
         		}
-        		if(currP.closeTo(d, end)){
-        			opD = d;
-        			break;
-        		}
-        		opD = d;
-        	}
-        	
-        	route.add(opD);
-        	currP = nxtP;
-        }
-        return route;
+    		}
+    		if(curP.closeTo(d, end)){
+    			opD = d;
+    			break;
+    		}
+    		opD = d;
+    	}
+        return opD;
 	}
     
     /** 
