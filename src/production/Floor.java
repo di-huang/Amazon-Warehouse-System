@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author josephtleiferman
+ * @author josephtleiferman,Wei Gui
  * 
  *
  */
@@ -18,7 +18,7 @@ public class Floor {
     public static Shelf[] SHELVES = {new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
     		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)}; // initialize shelves
     public static final Point CHARGER = new Point(2,0,"CHARGER");
-    public static final Point RECEIVING_DOCK = new Point(5,0,"RECEIVING_DOCK");
+    public static final Point CHARGER_2 = new Point(5,0,"CHARGER_2");
     public static final Point PICKER = new Point(1,5,"PICKER");
     public static final Point PICKER_WAITTING_AREA = new Point(2,5,"PICKER_WAITTING_AREA");
     public static final Point PACKER = new Point(1,2,"PACKER");
@@ -248,6 +248,20 @@ public class Floor {
         }
         return route;
 	}
+    /** 
+     * return true or false depending on if an object is at location [x,y] in Point 
+     * <p>
+     * @param l a Point [x,y] of objects location  
+     * @return boolean whether an object is at a given [x,y]
+     */
+    public boolean objectAt(Point l) {
+        for(Point x: FLOOR_LOCATIONS.values() ) {
+            if(x.getX() == l.getX() && x.getY()== l.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
 	/**********************************************************************
 	 * following methods are not used for our simulation pattern right now
 	 */
@@ -259,7 +273,7 @@ public class Floor {
 	   FLOOR_LOCATIONS.put("SHELVE_1",SHELVES[0].getPos());
        FLOOR_LOCATIONS.put("SHELVE_2",SHELVES[1].getPos());
        FLOOR_LOCATIONS.put("CHARGER",CHARGER);
-       FLOOR_LOCATIONS.put("RECEIVING_DOCK",RECEIVING_DOCK);
+       FLOOR_LOCATIONS.put("CHARGER_2",CHARGER_2);
        FLOOR_LOCATIONS.put("PICKER",PICKER);
        FLOOR_LOCATIONS.put("PACKER",PACKER);
    }
@@ -276,20 +290,6 @@ public class Floor {
        return FLOOR_LOCATIONS.get(l);
    }
    
-   /** 
-    * return true or false depending on if an object is at location [x,y] in Point 
-    * <p>
-    * @param l a Point [x,y] of objects location  
-    * @return boolean whether an object is at a given [x,y]
-    */
-   public boolean objectAt(Point l) {
-       for(Point x: FLOOR_LOCATIONS.values() ) {
-           if(x.getX() == l.getX() && x.getY()== l.getY()) {
-               return true;
-           }
-       }
-       return false;
-   }
    /** updates location of a given shelf
     * 
     * @param object the shelves name

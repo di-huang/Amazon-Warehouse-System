@@ -63,5 +63,8 @@ public class Production {
 	public static RobotScheduler getR() {
 		return R;
 	}
+	public static Floor getF() {
+		return F;
+	}
 		
 }

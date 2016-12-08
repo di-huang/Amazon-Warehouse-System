@@ -158,6 +158,9 @@ public class Visualizer implements Tickable{
 			int xCharger = Floor.CHARGER.getX();
 			int yCharger = Floor.CHARGER.getY();
 			g.fillRect(xCharger*gridSize+offset, yCharger*gridSize+offset, gridSize, gridSize);
+			xCharger = Floor.CHARGER_2.getX();
+			yCharger = Floor.CHARGER_2.getY();
+			g.fillRect(xCharger*gridSize+offset, yCharger*gridSize+offset, gridSize, gridSize);
 
 			// Shelf
 			for(Shelf s : Floor.SHELVES){

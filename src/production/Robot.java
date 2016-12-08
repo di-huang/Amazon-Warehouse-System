@@ -10,16 +10,17 @@ import java.util.LinkedList;
 public class Robot implements Tickable{
 	String ID;
 	Point pos;
-	final Point home=Floor.CHARGER;
+	final Point home;
 	Directions nd;	// next direction
 	State state;
 	Shelf shelf;
 	Order currO;
 	boolean carrying;
-	int battery = 50;	// full battery is 50
+	int battery = 100;	// full battery is 100
 	public Robot(String id, Point p) {
 		ID = id;
 		pos = p;
+		home=p;
 		nd = null;
 		state = State.IDLE;
 		shelf = null;
@@ -124,6 +125,15 @@ public class Robot implements Tickable{
 				}
 				break;
 			}
+			shelf = ItemControl.findItem(currO.getUnfilledItemInfo());
+			if(shelf==null) {
+				System.out.println(this+": Shelf already in use,go to charge");
+				state = State.GoingToCharge;
+				carrying = false;
+				end = home;
+				nd = Floor.getDirection(this, pos, end);
+				break;
+			}
 			nd = Floor.getDirection(this, pos, end);
 			break;
 		case HeadingToPicker:
@@ -184,10 +194,10 @@ public class Robot implements Tickable{
 			break;
 		case Charging:
 			System.out.println(this+" is charging itself.");
-			if(battery < 50){
+			if(battery < 100){
 				battery += 10;
-				if(battery > 50){
-					battery = 50;
+				if(battery > 100){
+					battery = 100;
 				}
 			}else{
 				state = State.IDLE;
@@ -243,6 +253,7 @@ public class Robot implements Tickable{
 			for(Robot r:RobotScheduler.robots) {
 				if(r==this) continue;
 				if(r.getPOS().equals(p)) good=false;
+				if(Production.getF().objectAt(p)) good=false;
 			}
 			if(good==true) return p;
 			}
