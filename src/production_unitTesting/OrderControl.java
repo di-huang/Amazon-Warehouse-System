@@ -124,20 +124,15 @@ public class OrderControl implements Tickable {
 			return; //tick because this Order cannot be completed
 		}
 
-
-		
 		//the inventory can support the Order
 		System.out.println("Item found in Inventory");
 		
-
-
 		//errors unavoidable
 		if(!ItemController.itemAvailable(currentOrder.getItemBeingOrdered())) {
 			System.out.println("The Inventory CANNOT support an Order of that quantity");
 			currentOrder = null;
 			return;
 		}
-		
 		
 		//success.... the inventory can support the Order
 		System.out.println("The Inventory CAN support that Order quantity");

@@ -24,10 +24,10 @@ public class ItemController {
 	}
 
 	public ItemController(HashMap<String, OrderItem> database) {
-		this.inventory = database;
+		ItemController.inventory = database;
 	}
 	
-	public static void addItem(OrderItem i){
+	public void addItem(OrderItem i){
 		inventory.put(i.getOrderItemName(), i);
 		// if the quantity of the item lower then the minimum (set by administrator), we should additem
 	}
