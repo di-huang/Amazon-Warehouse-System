@@ -54,7 +54,7 @@ public class TestOrders {
 		I.addItem(DUCT_TAPE);
 		I.addItem(EGG_PLANT);
 		I.addItem(BOOK);
-		I.addItem(FLUTE);
+		I.addItem(FLUTE); 
 		//commented out for testing
 		//I.addItem(KITE);
 		I.addItem(SKI_POLE);

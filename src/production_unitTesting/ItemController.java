@@ -9,7 +9,7 @@ import production_unitTesting.Report;
 /**
  * @author wangyang xu 
  * @author Charles Carlson
- * 		-modified this to work with OrderItems and ItemController
+ * 		-modified this to work with OrderItems and ItemController 
  * it is OrderItem control system, including checking item available, adding item, reduce item quantity.
  */
  

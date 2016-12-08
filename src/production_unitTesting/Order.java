@@ -40,7 +40,6 @@ public class Order {
      * following methods are straightforward getters and setters
      * there are also getters for the fields of the Item of the Order
      * a lot of these don't get used by are there just in case
-     * 
      */
     public OrderItem getItemBeingOrdered() {
     	return this.itemBeingOrdered;

@@ -45,7 +45,7 @@ public class OrderControl implements Tickable {
 
 	/**
 	 * @author Charles Carlson
-	 * 
+	 *  
 	 * add an Order to the Pending Orders
 	 * the Order will be held here until ticking begins
 	 */

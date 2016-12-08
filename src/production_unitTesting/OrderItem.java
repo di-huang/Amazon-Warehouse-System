@@ -10,7 +10,7 @@ public class OrderItem {
 	 * 	1. String name
 	 * 	2. Integer quantity (this is the quantity that the ItemController possesses, not the quantity requested by the customer)
 	 * 	3. String shelfID (which shelf, and therefore, where in the warehouse is the Order Item)
-	 * I had to differentiate from Item and ItemControl somehow
+	 *  I had to differentiate from Item and ItemControl somehow
 	 */
 	private String name;
 	private Integer quantity;
