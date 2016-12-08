@@ -1,7 +1,7 @@
 package production_unitTesting;
 
 
-import production_untitTesting.Item;
+import production_unitTesting.Item;
 
 
 public class Order {
@@ -86,8 +86,8 @@ public class Order {
      * however, locating shelves for robots will not be done using this method
      */
     public String getItemBeingOrderedShelfID() {
-    	if(this.itemBeingOrdered.shelfID!=null) { 
-    		return this.itemBeingOrdered.shelfID; 
+    	if(this.itemBeingOrdered.ID()!=null) { 
+    		return this.itemBeingOrdered.ID(); 
     	}
     	
     	else { 
