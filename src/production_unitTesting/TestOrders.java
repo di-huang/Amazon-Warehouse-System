@@ -44,6 +44,7 @@ public class TestOrders {
 
 
 		OrderControl O = new OrderControl();
+		ItemController I = new ItemController();
 		
 		/**
 		 * @author Charles Carlson
@@ -62,7 +63,7 @@ public class TestOrders {
 		Item EGG_PLANT = new Item("EGG_PLANT", 2000, "5");
 		Item FLUTE = new Item("FLUTE", 5, "6");
 		Item KITE = new Item("KITE", 1, "7");
-		Item SKI_POLE = new Item("SKI_POLE",3,"3");
+		Item SKI_POLE = new Item("SKI_POLE",3,"3"); 
 		
 		
 		/**

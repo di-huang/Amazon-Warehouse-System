@@ -17,7 +17,7 @@ public class Order {
 	 */
 
 
-	public Item itemBeingOrdered;
+	public OrderItem itemBeingOrdered;
     public Integer quantity;
     public String shippingAddress;
 
@@ -41,7 +41,7 @@ public class Order {
      * @param shippingAddress
      * 
      */
-    public Order(Item itemBeingOrdered, Integer quantity, String shippingAddress ) {
+    public Order(OrderItem itemBeingOrdered, Integer quantity, String shippingAddress ) {
 
 
         /*this.serial = serial;
@@ -63,7 +63,7 @@ public class Order {
      */
 
 
-    public Item getItemBeingOrdered() {
+    public OrderItem getItemBeingOrdered() {
     	return this.itemBeingOrdered;
     }
     
@@ -86,8 +86,8 @@ public class Order {
      * however, locating shelves for robots will not be done using this method
      */
     public String getItemBeingOrderedShelfID() {
-    	if(this.itemBeingOrdered.ID()!=null) { 
-    		return this.itemBeingOrdered.ID(); 
+    	if(this.itemBeingOrdered.getOrderItemShelfID()!=null) { 
+    		return this.itemBeingOrdered.getOrderItemShelfID(); 
     	}
     	
     	else { 
