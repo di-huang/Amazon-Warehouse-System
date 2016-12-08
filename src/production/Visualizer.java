@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author dihuang
+ * @author dihuang, Wei Gui
  *
  */
 public class Visualizer implements Tickable{

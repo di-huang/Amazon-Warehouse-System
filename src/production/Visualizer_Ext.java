@@ -1,19 +1,24 @@
 package production;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JButton;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+/**
+ * 
+ * @author dihuang, Wei Gui
+ *
+ */
 
 public class Visualizer_Ext {
 
 	private JFrame frame;
 	private Visualizer mast;
-
 	/**
 	 * Launch the application.
 	 
@@ -64,12 +69,35 @@ public class Visualizer_Ext {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(284, 188, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 444, 21);
+		frame.getContentPane().add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Demo");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Restart Demo");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Production.restart();
+				try {
+					callfinalize();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenu mnNewMenu_1 = new JMenu("Controllers");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("OrderController");
+		mnNewMenu_1.add(mntmNewMenuItem_1);
 	}
 	public void callfinalize() throws Throwable {
 		mast.setext(null);
+		frame.dispose();
 		this.finalize();
 	}
 }
