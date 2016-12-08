@@ -70,8 +70,8 @@ public class Visualizer implements Tickable{
 			addMouseListener(new MouseAdapter(){
 				@Override
 				public void mousePressed(MouseEvent e) {
-					int x = e.getX()/10 - 5;
-					int y = e.getY()/10 - 5;
+					int x = (e.getX()-offset)/gridSize;
+					int y = (e.getY()-offset)/gridSize;
 					String temp = "("+x + "," + y+")";
 					if(x < 0 || x > 5 || y < 0 || y > 5 || debug.equals(temp)) return;
 					debug = temp;
