@@ -8,7 +8,14 @@ import java.util.LinkedList;
  *
  */
 public class OrderControl implements Tickable{
-	private static final LinkedList<Order> orderQueue = new LinkedList<Order>();
+	private static LinkedList<Order> orderQueue = new LinkedList<Order>();
+    /**
+     * @author Wei
+     */
+	public static void clearstaticFields() {
+		orderQueue = new LinkedList<Order>();
+		pendingOrders = new LinkedList<Order>();
+	}
 	public OrderControl(){
 		// schedule orders for testing
 		orderQueue.add(new Order("a st", new ItemSlot[]{new ItemSlot(Catalog.at(3)),new ItemSlot(Catalog.at(0))}));	// fork, pen

@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 public class Visualizer_Ext {
 
 	private JFrame frame;
-	private Visualizer mast;
 	/**
 	 * Launch the application.
 	 
@@ -41,15 +40,14 @@ public class Visualizer_Ext {
 	public JFrame getFrame() {
 		return frame;
 	}
-	public Visualizer_Ext(Visualizer Master) {
-		mast=Master;
-		initialize(Master);
+	public Visualizer_Ext() {
+		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Visualizer Master) {
+	private void initialize() {
 		frame = new JFrame();
 		frame.addComponentListener(new ComponentAdapter() {
 			@Override
@@ -63,8 +61,8 @@ public class Visualizer_Ext {
 		});
 		frame.setBounds(100, 100, 450, 300);
 		frame.setTitle("Warehouse System Extension");
-		java.awt.Point offsetpoint= (java.awt.Point)Master.getFrame().getLocation().clone();
-		offsetpoint.translate(Master.getFrame().getWidth()+10,0);
+		java.awt.Point offsetpoint= (java.awt.Point)Production.getV().getFrame().getLocation().clone();
+		offsetpoint.translate(Production.getV().getFrame().getWidth()+10,0);
 		frame.setLocation(offsetpoint);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
@@ -79,9 +77,8 @@ public class Visualizer_Ext {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Restart Demo");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Production.restart();
 				try {
-					callfinalize();
+					Production.restart();
 				} catch (Throwable e1) {
 					e1.printStackTrace();
 				}
@@ -96,7 +93,7 @@ public class Visualizer_Ext {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 	}
 	public void callfinalize() throws Throwable {
-		mast.setext(null);
+		Production.getV().setext(null);
 		frame.dispose();
 		this.finalize();
 	}

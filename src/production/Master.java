@@ -9,8 +9,10 @@ public class Master implements Runnable {
 	private int limit = 100;					// default: limit = 100 ticks
 	private int unitTime = 1000;				// default: 1 second per tick
 	private boolean running = false;
-	
+	private boolean killing = false;
+	private volatile Thread me=new Thread(this);
 	private Belt B;
+	@SuppressWarnings("unused")
 	private Floor F;
 	private ItemControl I;
 	private OrderControl O;
@@ -31,13 +33,12 @@ public class Master implements Runnable {
 	int tick = 0;
 	@Override
 	public void run() {
-		while (running && tick < limit) {
+		Thread thisThread = Thread.currentThread();
+		while (running && tick < limit && me==thisThread) {
 			System.out.println("tick " + tick);
 			tick(tick);
 			System.out.println();
-			
 			unitTime();
-			
 			tick++;
 		}
 	}
@@ -49,7 +50,7 @@ public class Master implements Runnable {
 			return;
 		}
 		running = true;
-		new Thread(this).start();
+		me.start();
 	}
 	public void stop(){
 		running = false;
@@ -59,6 +60,9 @@ public class Master implements Runnable {
 	}
 	public void setUnitTime(int milliseconds){
 		unitTime = milliseconds;
+	}
+	public void kill() {
+		me=null;
 	}
 	private void unitTime(){
 		try {

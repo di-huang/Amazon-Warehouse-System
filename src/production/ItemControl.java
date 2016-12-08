@@ -10,7 +10,13 @@ import java.util.List;
  *
  */
 public class ItemControl implements Tickable {
-	static final HashSet<Item> stock = new HashSet<Item>();
+	static HashSet<Item> stock = new HashSet<Item>();
+    /**
+     * @author Wei
+     */
+	public static void clearstaticFields() {
+		stock = new HashSet<Item>();
+	}
 	ItemControl() {
 		Shelf shelf1 = Floor.SHELVES[0];//suppose there are two shelves		
 		Shelf shelf2 = Floor.SHELVES[1];

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -88,6 +86,7 @@ public class Visualizer implements Tickable{
 	 * @author dihuang
 	 * Screen sub-component of Visualizer which shows the graphical simulation
 	 */
+	@SuppressWarnings("serial")
 	private class Screen extends JPanel{
 		final int offset = 50;
 		final int gridSize = Floor.gridSize;
@@ -232,7 +231,7 @@ public class Visualizer implements Tickable{
 			ext.callfinalize();
 			ext=null;
 		} else {
-			ext=new Visualizer_Ext(this);
+			ext=new Visualizer_Ext();
 			ext.getFrame().setVisible(true);
 		}
 	}

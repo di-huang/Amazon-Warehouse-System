@@ -15,12 +15,21 @@ public class Belt implements Tickable{
 	private static LinkedList<Bin> belt1Content = new LinkedList<Bin>();
 	private static LinkedList<Parcel> belt2Content = new LinkedList<Parcel>();
 	// place belts according to layout of Floor
-	private static Point[] belt1Points = {new Point(0,5),new Point(0,4),new Point(0,3),new Point(0,2)};
-	private static Point[] belt2Points = {new Point(0,2),new Point(0,1),new Point(0,0)};
+	private final static Point[] belt1Points = {new Point(0,5),new Point(0,4),new Point(0,3),new Point(0,2)};
+	private final static Point[] belt2Points = {new Point(0,2),new Point(0,1),new Point(0,0)};
 	final static Point belt1Start = belt1Points[0];
 	final static Point belt2Start = belt2Points[0];
 	final static Point belt1End = belt1Points[belt1Points.length-1];
 	final static Point belt2End = belt2Points[belt2Points.length-1];
+	/**
+     * @author Wei
+     */
+	public static void clearstaticFields() {
+		belt1Content = new LinkedList<Bin>();
+		belt2Content = new LinkedList<Parcel>();
+		currB=null;
+		Tick=0;
+	}
 	public Belt() {
 		belt1Points[0].setNext(belt1Points[1]);
 		belt1Points[1].setNext(belt1Points[2]);

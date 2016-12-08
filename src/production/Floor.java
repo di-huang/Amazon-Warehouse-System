@@ -9,12 +9,12 @@ import java.util.LinkedList;
  *
  */
 public class Floor {
-	public static Point SHELVE_1 = new Point(2,2,"SHELVE_1");
-    public static Point SHELVE_2 = new Point(3,2,"SHELVE_2");
-    public static Point SHELVE_3 = new Point(5,1,"SHELVE_3");
-    public static Point SHELVE_4 = new Point(5,2,"SHELVE_4");
-    public static Point SHELVE_5 = new Point(5,3,"SHELVE_5");
-    public static Point SHELVE_X = new Point(5,4,"SHELVE_X");		// reserved for magical replenishment
+	public static final Point SHELVE_1 = new Point(2,2,"SHELVE_1");		// homepoint of shelves
+    public static final Point SHELVE_2 = new Point(3,2,"SHELVE_2");
+    public static final Point SHELVE_3 = new Point(5,1,"SHELVE_3");
+    public static final Point SHELVE_4 = new Point(5,2,"SHELVE_4");
+    public static final Point SHELVE_5 = new Point(5,3,"SHELVE_5");
+    public static final Point SHELVE_X = new Point(5,4,"SHELVE_X");		// reserved for magical replenishment
     public static Shelf[] SHELVES = {new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
     		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)}; // initialize shelves
     public static final Point CHARGER = new Point(2,0,"CHARGER");
@@ -22,13 +22,20 @@ public class Floor {
     public static final Point PICKER = new Point(1,5,"PICKER");
     public static final Point PICKER_WAITTING_AREA = new Point(2,5,"PICKER_WAITTING_AREA");
     public static final Point PACKER = new Point(1,2,"PACKER");
-    public static Point[] PICKERBELT = { new Point(0,5,"PICKERBELT5"),new Point(0,4,"PICKERBELT4"),new Point(0,3,"PICKERBELT3") };
-    public static Point[] PACKERBELT = { new Point(0,2,"PICKERBELT2"),new Point(0,1,"PICKERBELT1"),new Point(0,0,"PICKERBELT0") };
+    public static final Point[] PICKERBELT = { new Point(0,5,"PICKERBELT5"),new Point(0,4,"PICKERBELT4"),new Point(0,3,"PICKERBELT3") };
+    public static final Point[] PACKERBELT = { new Point(0,2,"PICKERBELT2"),new Point(0,1,"PICKERBELT1"),new Point(0,0,"PICKERBELT0") };
 	public static final int width = 300, height = 300;
 	public static final int gridSize = 50;
 	public static final int UPPERB = 5;
     public static final int LOWERB = 0;
-    
+    /**
+     * @author Wei
+     */
+	public static void clearstaticFields() {
+		SHELVES = new Shelf[]{new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
+	    		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)};
+		FLOOR_LOCATIONS = new HashMap<>();
+	}
     /**
      * @author dihuang
      * Generating dynamic route(improve applicability and expandability), so we have to call this method each tick. 
