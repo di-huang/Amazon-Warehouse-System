@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author  Wei Gui
+ * @author  Wei Gui,dihuang
  *
  */
 

@@ -7,14 +7,11 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * 
- * @author dihuang
+ * @author dihuang, Wei Gui
  *
  */
 public class OrderControl implements Tickable{
 	private static LinkedList<Order> orderQueue = new LinkedList<Order>();
-    /**
-     * @author Wei
-     */
 	public static void clearstaticFields() {
 		orderQueue = new LinkedList<Order>();
 		pendingOrders = new LinkedList<Order>();

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * 
- * @author josephtleiferman
+ * @author josephtleiferman,Wei Gui
  * 
  *
  */
@@ -28,9 +28,6 @@ public class Floor {
 	public static final int gridSize = 50;
 	public static final int UPPERB = 5;
     public static final int LOWERB = 0;
-    /**
-     * @author Wei
-     */
 	public static void clearstaticFields() {
 		SHELVES = new Shelf[]{new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
 	    		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)};

@@ -2,7 +2,7 @@ package production;
 
 /**
  * 
- * @author dihuang
+ * @author dihuang,Wei Gui
  * 
  */
 public class Master implements Runnable {
