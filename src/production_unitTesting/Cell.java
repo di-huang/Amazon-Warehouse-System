@@ -29,11 +29,15 @@ public class Cell  {
 	    System.out.println(one.getName());
 	    
    }
-   public Object cellType(Point p1){
+   
+   /**
+    * @author Charles Carlson commented this out to remove errors, I don't think Belt is even using this repo anymore
+    */
+   /*public Object cellType(Point p1){
 	   System.out.println(p1.getObject().toString());
 	   return p1.getObject();
 	   
-   }
+   }*/
    public boolean isBin(Point p1){
 	   Point myP = p1;
 	   String name = p1.getName();
