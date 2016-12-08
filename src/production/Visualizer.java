@@ -6,10 +6,16 @@ import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 /**
  * 
@@ -44,7 +50,7 @@ public class Visualizer implements Tickable{
 		tempp.translate(-Floor.width/2, -Floor.height/2);
 		f.setLocation(tempp);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		screen = new Screen();
 		JButton start_jb = new JButton("Start");
 		start_jb.addMouseListener(new MouseAdapter(){
@@ -81,6 +87,7 @@ public class Visualizer implements Tickable{
 		f.pack();
 		f.setAlwaysOnTop(true);
 		f.setVisible(true);
+		redirectSystemStreams();
 	}
 	/**
 	 * @author dihuang
@@ -92,7 +99,7 @@ public class Visualizer implements Tickable{
 		final int gridSize = Floor.gridSize;
 		final int width = Floor.width;
 		final int height = Floor.height;
-		
+
 		String debug = "";
 		Screen(){
 			addMouseListener(new MouseAdapter(){
@@ -107,7 +114,7 @@ public class Visualizer implements Tickable{
 					System.out.println("Debug: this coordinate is " + debug);
 					System.out.println("++++++++++++++++++++++++++++++++");
 				}
-				
+
 			});
 		}
 		@Override
@@ -128,7 +135,7 @@ public class Visualizer implements Tickable{
 			for(int i = 1; i < width/gridSize; i++){
 				g.drawLine(offset+gridSize*i, offset, offset+gridSize*i, height+offset);
 			}
-			
+
 			// belt
 			paintBelt(0, 5, g);
 			paintBelt(0, 4, g);
@@ -136,7 +143,7 @@ public class Visualizer implements Tickable{
 			paintBelt(0, 2, g);
 			paintBelt(0, 1, g);
 			paintBelt(0, 0, g);
-			
+
 			// picker and packer stations
 			g.setColor(Color.GREEN);
 			int xPicker = Floor.PICKER.getX();
@@ -145,22 +152,22 @@ public class Visualizer implements Tickable{
 			int yPacker = Floor.PACKER.getY();
 			g.fillRect(xPicker*gridSize+offset, yPicker*gridSize+offset, gridSize, gridSize);
 			g.fillRect(xPacker*gridSize+offset, yPacker*gridSize+offset, gridSize, gridSize);
-			
+
 			// chargers
 			g.setColor(Color.RED);
 			int xCharger = Floor.CHARGER.getX();
 			int yCharger = Floor.CHARGER.getY();
 			g.fillRect(xCharger*gridSize+offset, yCharger*gridSize+offset, gridSize, gridSize);
-			
+
 			// Shelf
 			for(Shelf s : Floor.SHELVES){
 				paintShelf(s.getPos(),g);
 			}
-			
+
 			// Robot
 			Robot r = RobotScheduler.robots[0];
 			paintRobot(r, g);
-			
+
 			// Bin
 			for(Bin b : Belt.getBelt1()){
 				paintBin(b.getPos(),g);
@@ -200,9 +207,9 @@ public class Visualizer implements Tickable{
 			int yShelf = pos.getY();
 			g.fillRect(xShelf*gridSize+offset, yShelf*gridSize+offset, gridSize, gridSize);
 			g.setColor(Color.BLACK);
-            g.drawRect(xShelf*gridSize+offset, yShelf*gridSize+offset, gridSize, gridSize);
-            g.drawLine(xShelf*gridSize+offset, yShelf*gridSize+offset, xShelf*gridSize+offset+gridSize, yShelf*gridSize+offset+gridSize);
-            g.drawLine(xShelf*gridSize+offset, yShelf*gridSize+offset+gridSize, xShelf*gridSize+offset+gridSize, yShelf*gridSize+offset);
+			g.drawRect(xShelf*gridSize+offset, yShelf*gridSize+offset, gridSize, gridSize);
+			g.drawLine(xShelf*gridSize+offset, yShelf*gridSize+offset, xShelf*gridSize+offset+gridSize, yShelf*gridSize+offset+gridSize);
+			g.drawLine(xShelf*gridSize+offset, yShelf*gridSize+offset+gridSize, xShelf*gridSize+offset+gridSize, yShelf*gridSize+offset);
 		}
 		void paintBin(Point pos, Graphics g){
 			g.setColor(Color.ORANGE);
@@ -234,5 +241,41 @@ public class Visualizer implements Tickable{
 			ext=new Visualizer_Ext();
 			ext.getFrame().setVisible(true);
 		}
+	}
+	private void updateTextPane(final String text) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				if(ext!=null) {
+					Document doc = ext.getTextPane().getDocument();
+					try {
+						doc.insertString(doc.getLength(), text, null);
+					} catch (BadLocationException e) {
+						throw new RuntimeException(e);
+					}
+					ext.getTextPane().setCaretPosition(doc.getLength() - 1);
+				}
+			}
+		});
+	}
+	private void redirectSystemStreams() {
+		OutputStream out = new OutputStream() {
+			@Override
+			public void write(final int b) throws IOException {
+				updateTextPane(String.valueOf((char) b));
+			}
+
+			@Override
+			public void write(byte[] b, int off, int len) throws IOException {
+				updateTextPane(new String(b, off, len));
+			}
+
+			@Override
+			public void write(byte[] b) throws IOException {
+				write(b, 0, b.length);
+			}
+		};
+
+		System.setOut(new PrintStream(out, true));
+		System.setErr(new PrintStream(out, true));
 	}
 }

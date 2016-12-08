@@ -81,6 +81,13 @@ public class Master implements Runnable {
 		I.tick(tick);
 		B.tick(tick);
 		V.tick(tick);
+		V.getext().getTextField().setText(Integer.toString(tick));
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public int getUnitTime() {
+		return unitTime;
 	}
 }
 

@@ -21,6 +21,9 @@ public class Production {
 		M.setUnitTime(200);
 	}
 	public static void restart() throws Throwable {
+		restart(620,200);
+	}
+	public static void restart(int a,int b) throws Throwable {
 		M.kill();
 		Belt.clearstaticFields();
 		Floor.clearstaticFields();
@@ -37,8 +40,11 @@ public class Production {
 		O = new OrderControl();
 		V = new Visualizer();
 		M = new Master(B, F, I, O, R, V);
-		M.setLimit(620);
-		M.setUnitTime(200);
+		M.setLimit(a);
+		M.setUnitTime(b);
+	}
+	public static Master getM() {
+		return M;
 	}
 		
 }
