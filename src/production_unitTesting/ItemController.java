@@ -8,7 +8,7 @@ import production_unitTesting.Report;
 
 /**
  * @author wangyang xu 
- * it is item control system, including checking item available, adding item, reduece item quantity.
+ * it is OrderItem control system, including checking item available, adding item, reduece item quantity.
  */
  
 public class ItemController {
