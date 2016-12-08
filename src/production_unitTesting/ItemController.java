@@ -8,6 +8,8 @@ import production_unitTesting.Report;
 
 /**
  * @author wangyang xu 
+ * @author Charles Carlson
+ * 		-modified this to work with OrderItems and ItemController
  * it is OrderItem control system, including checking item available, adding item, reduece item quantity.
  */
  
@@ -15,25 +17,25 @@ public class ItemController {
 	/**
 	 * This works as the inventory subsystem
 	 */
-	private HashMap<String, Item> inventory;
+	private HashMap<String, OrderItem> inventory;
 
 	public ItemController() {
-		inventory = new HashMap<String, Item>();
+		inventory = new HashMap<String, OrderItem>();
 	}
 
-	public ItemController(HashMap<String, Item> database) {
+	public ItemController(HashMap<String, OrderItem> database) {
 		this.inventory = database;
 	}
 	
-	public void addItem(Item i){
-		inventory.put(i.name, i);
+	public void addItem(OrderItem i){
+		inventory.put(i.getOrderItemName(), i);
 		// if the quantity of the item lower then the minimum (set by administrator), we should additem
 	}
 	
-	public boolean itemAvailable(Item i) {
-		if (!inventory.containsKey(i.name)) {
+	public boolean itemAvailable(OrderItem i) {
+		if (!inventory.containsKey(i.getOrderItemName())) {
 			return false; }
-		return inventory.get(i.name).quantity >= i.quantity;
+		return inventory.get(i.getOrderItemName()).getOrderItemQuantity() >= i.getOrderItemQuantity();
 		// check whether the item and the quantity of the item can meet the requirement of order
 	}
 }

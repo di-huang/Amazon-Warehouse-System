@@ -11,5 +11,17 @@ public class OrderItem {
 		this.quantity = quantity;
 		this.shelfID = shelfID;
 	}
+	
+	public String getOrderItemName() {
+		return this.name;
+	}
+	
+	public Integer getOrderItemQuantity() {
+		return this.quantity;
+	}
+	
+	public String getOrderItemShelfID() {
+		return this.shelfID;
+	}
 
 }
