@@ -7,4 +7,4 @@ Wangyang Xu (Inventory) <br />
 Di Huang (Master) <br />
 
 Current Issue: <br />
-Prepare for the demo day!
+Final report.
