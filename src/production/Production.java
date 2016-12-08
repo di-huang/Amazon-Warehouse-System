@@ -42,6 +42,7 @@ public class Production {
 		if(V.getext()!=null)V.getext().callfinalize();
 		V.getFrame().setVisible(false);
 		V.getFrame().dispose();
+		OG.dispose();
 		System.gc();
 		F=new Floor();
 		B = new Belt();
@@ -50,6 +51,7 @@ public class Production {
 		O = new OrderControl();
 		V = new Visualizer();
 		M = new Master(B, F, I, O, R, V);
+		OG=null;
 		M.setLimit(a);
 		M.setUnitTime(b);
 	}
