@@ -28,16 +28,14 @@ public class getRouteTest {
 
 		production.Point  robot = new production.Point(3,1);
 		production.Point picker = new production.Point(1,5);
-		expectedRoute.add(Directions.LEFT);
-		expectedRoute.add(Directions.DOWN);
-		expectedRoute.add(Directions.LEFT);	
-		expectedRoute.add(Directions.DOWN);
-		expectedRoute.add(Directions.LEFT);
+		expectedRoute.add(Directions.UP);
 		expectedRoute.add(Directions.LEFT);
 		expectedRoute.add(Directions.LEFT);	
 		expectedRoute.add(Directions.DOWN);
-		expectedRoute.add(Directions.LEFT);
-		expectedRoute.add(Directions.LEFT);
+		expectedRoute.add(Directions.DOWN);
+		expectedRoute.add(Directions.DOWN);
+		expectedRoute.add(Directions.DOWN);	
+		expectedRoute.add(Directions.DOWN);
 		LinkedList<Directions> actualRoute = floor.getRouteWithShelf(robot, picker);
 		for(int i=0;i< actualRoute.size();i++) {
 			System.out.println("Expected: " + expectedRoute.get(i));
