@@ -6,4 +6,4 @@ Charles Carlson (Orders) <br />
 Wangyang Xu (Inventory) <br />
 Di Huang (Master) <br />
 
-For TA grading: our final runnable simulation program is in package "production" and unit test of each part is in package "production_unitTesting".
+For TA grading: our final runnable simulation program is in package "src/production" and unit test of each part is in package "src/production_unitTesting".
