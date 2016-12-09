@@ -59,7 +59,7 @@ public class Point {
 	public boolean out(){
 		int x_upperbound = Floor.width/Floor.gridSize-1;
 		int y_upperbound = Floor.height/Floor.gridSize-1;
-		return x < 1 || y < 0 || x > x_upperbound || y > y_upperbound;
+		return x < 2 || y < 0 || x > x_upperbound || y > y_upperbound;
 	}
 	public boolean closeTo(Directions d, Point end){
 		Point next = this.nextpoint(d);
