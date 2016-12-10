@@ -18,7 +18,7 @@ public class Floor {
     public static Shelf[] SHELVES = {new Shelf(SHELVE_1), new Shelf(SHELVE_2), new Shelf(SHELVE_3),
     		new Shelf(SHELVE_4), new Shelf(SHELVE_5),new Shelf(SHELVE_X)}; // initialize shelves
     public static final Point CHARGER = new Point(2,0,"CHARGER");
-    public static final Point CHARGER_2 = new Point(5,0,"CHARGER_2");
+    public static final Point CHARGER_2 = new Point(4,0,"CHARGER_2");
     public static final Point PICKER = new Point(1,5,"PICKER");
     public static final Point PICKER_WAITTING_AREA = new Point(2,5,"PICKER_WAITTING_AREA");
     public static final Point PACKER = new Point(1,2,"PACKER");
