@@ -1,7 +1,2 @@
-# Group_B3
-Wei Gui (Robot) <br />
-Nick Barnes (Belt)  <br />
-Joseph Leiferman (Floor) <br />
-Charles Carlson (Orders) <br />
-Wangyang Xu (Inventory) <br />
-Di Huang (Master) <br />
+# Amazon Warehouse Simulation
+Group_B3: &nbsp; `Di Huang` &nbsp; `Joseph Leiferman` &nbsp; `Wei Gui` &nbsp; `Charles Carlson` &nbsp; `Wangyang Xu` &nbsp; `Nick Barnes`<br />
