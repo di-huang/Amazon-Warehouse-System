@@ -8,9 +8,6 @@ import java.util.LinkedList;
  * @author dihuang
  *
  */
-//hello
-//hello
-//hello
 public class Belt implements Tickable{
 	private static LinkedList<Bin> belt1Content = new LinkedList<Bin>();
 	private static LinkedList<Parcel> belt2Content = new LinkedList<Parcel>();

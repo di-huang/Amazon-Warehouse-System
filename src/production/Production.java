@@ -2,7 +2,7 @@ package production;
 
 /**
  * 
- * @author dihuang,Wei Gui
+ * @author dihuang, Wei Gui
  *
  */
 public class Production {

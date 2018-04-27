@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 
- * @author wangyang xu, Ted Herman, dihuang
+ * @author dihuang, wangyang xu, Ted Herman
  *
  */
 public class ItemControl implements Tickable {
@@ -117,7 +117,7 @@ public class ItemControl implements Tickable {
 	 */
 	public static boolean itemsAvailable(Order order) {
 		for (ItemSlot ip : order.getItemSlots())
-			if (itemStock(ip.itemInfo) < order.getNeededQuantity(ip.itemInfo))
+			if (itemStock(ip.getItemInfo()) < order.getNeededQuantity(ip.getItemInfo()))
 				return false;
 		return true;
 	}

@@ -12,13 +12,10 @@ import production.Floor;
 
 /**
  * @author josephtleiferman
- *
  */
 public class FloorTest {
 	MockFloor f = new MockFloor();
 	Point p = new Point(2,5,"p");
-	
-	
 	
 	@Test
 	public void test() {
